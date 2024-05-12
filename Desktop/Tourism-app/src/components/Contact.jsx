@@ -76,7 +76,7 @@ const Contact = () => {
                         </a>
                     </div>
                     <div className="c_boxx">
-                        <a href="#"
+                        <a href="https://www.google.com/maps?sca_esv=e7289ce89a0ad6ff&sca_upv=1&output=search&q=kapurthala&source=lnms&entry=mc&ved=1t:200715&ictx=111"
                             ><i className="fa fa-map-marker"></i>
                             Location: Kapurthala,Punjab,India
                         </a>

@@ -1,7 +1,8 @@
 import React from "react";
 import '../style.css';
 import '../responsive.css';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+// import  useState from 'react';
 import City from './City';
 import Home from './Home';
 import Contributions from "./Contributions";
@@ -27,7 +28,13 @@ const Nav = () => {
     );
 }
 const Navbar = () => {
-    const location = useLocation();
+    // const location = useLocation();    const [isActive, setIsActive] = useState(false);
+
+    // const [isActive, setIsActive] = useState(false);
+// 
+    // const toggleActive = () => {
+        // setIsActive(!isActive);
+    // };
 
     return (
         <nav className="navbar glass" style={{ height: '70px' }}>
@@ -39,16 +46,17 @@ const Navbar = () => {
             </span>
             <ul className="nav-links">
                 <li>
-                    <Link to="/" id="pri" className="active cir_border">Home</Link>
+                    <Link to="/" id="pri" className=" cir_border">Home</Link>
                 </li>
                 <li>
                     {/* <a href="#events" id="sec" className="cir_border">Events</a> */}
                     <Link to="/events" id="sec" className="cir_border">Events</Link>
+                    {/* <Link to="/events" id="sec" className={` ${isActive ? "active cir_border" : ""}`} onClick={toggleActive}>Events</Link> */}
 
                 </li>
                 <li>
                     {/* <a href="/explore.html" id="tri" className="cir_border">Explore</a> */}
-                    <Link to="/about" id="sext" className="cir_border">Explore</Link>
+                    <Link to="/explore" id="sext" className="cir_border">Explore</Link>
 
 
                 </li>
@@ -61,7 +69,7 @@ const Navbar = () => {
                 <li>
                     {/* <a href="#about" id="sext" className="cir_border">About</a> */}
                     {/* <Link to="/about" id="sext" className="cir_border">About</Link> */}
-                    <Link to="/explore" id="tri" className="cir_border">About</Link>
+                    <Link to="/about" id="tri" className="cir_border">About</Link>
 
 
                 </li>

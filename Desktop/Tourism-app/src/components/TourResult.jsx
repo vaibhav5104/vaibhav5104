@@ -50,6 +50,7 @@ const TourResult = ({ totalVal, finalCity }) => {
                 <div>
                 <TourCard
                     key={jaipurData[1].id}
+                    category=""
                     imgsrc={jaipurData[1].imgsrc}
                     place={jaipurData[1].place}
                     price={jaipurData[1].price}

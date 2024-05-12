@@ -1,5 +1,11 @@
 
 import React from 'react';
+import img1 from "../img/GitHub120px.png"
+import Vaibhav from "../img/Vaibhav.png";
+import Pianshu from "../img/Pianshu.png";
+import Jyoti from "../img/Jyoti.png";
+import Vanshika from "../img/Vanshika.png";
+import Yash from "../img/YKD.png";
 
 const Contributions = () => {
   return (
@@ -11,7 +17,7 @@ const Contributions = () => {
       <section className="contributors" id="contribution">
         <div className="concard">
           <img
-            src="./img/WhatsApp Image 2024-05-04 at 05.09.45.png"
+            src={Vaibhav}
             alt="Vaibhav"
             className="pfp"
           />
@@ -21,7 +27,7 @@ const Contributions = () => {
           <div className="logolink">
             <a href="https://github.com/search?q=Vaibhav5104&type=users" target="_blank" rel="noopener noreferrer">
               <img
-                src="img/GitHub120px.png"
+                src={img1}
                 alt="GitHub Logo"
                 className="github-logo"
               />
@@ -31,7 +37,7 @@ const Contributions = () => {
 
         <div className="concard">
           <img
-            src="/img/WhatsApp Image 2024-05-04 at 05.09.46.png"
+            src={Yash}
             alt="Yash Kumar Dubey "
             className="pfp"
           />
@@ -41,7 +47,7 @@ const Contributions = () => {
           <div className="logolink">
             <a href="https://github.com/search?q=yashdubey22&type=users" target="_blank" rel="noopener noreferrer">
               <img
-                src="img/GitHub120px.png"
+                src={img1}
                 alt="GitHub Logo"
                 className="github-logo"
               />
@@ -50,7 +56,7 @@ const Contributions = () => {
         </div>
         <div className="concard">
           <img
-            src="/img/WhatsApp Image 2024-05-04 at 05.09.45 (1).png"
+            src={Pianshu}
             alt="Pianshu Verma
             "
             className="pfp"
@@ -62,7 +68,7 @@ const Contributions = () => {
           <div className="logolink">
             <a href="/" target="_blank" rel="noopener noreferrer">
               <img
-                src="img/GitHub120px.png"
+                src={img1}
                 alt="GitHub Logo"
                 className="github-logo"
               />
@@ -71,7 +77,7 @@ const Contributions = () => {
         </div>
         <div className="concard">
           <img
-            src="/img/WhatsApp Image 2024-05-04 at 05.09.45 (2).png"
+            src={Vanshika}
             alt="Vanshika 
 
             "
@@ -85,7 +91,7 @@ const Contributions = () => {
           <div className="logolink">
             <a href="/" target="_blank" rel="noopener noreferrer">
               <img
-                src="img/GitHub120px.png"
+                src={img1}
                 alt="GitHub Logo"
                 className="github-logo"
               />
@@ -94,7 +100,7 @@ const Contributions = () => {
         </div>
         <div className="concard">
           <img
-            src="./img/jyoti.png"
+            src={Jyoti}
             alt="Jyoti
             "
             className="pfp"
@@ -106,7 +112,7 @@ const Contributions = () => {
           <div className="logolink">
             <a href="https://github.com/Jyoit" target="_blank" rel="noopener noreferrer">
               <img
-                src="/img/GitHub120px.png"
+                src={img1}
                 alt="GitHub Logo"
                 className="github-logo"
               />

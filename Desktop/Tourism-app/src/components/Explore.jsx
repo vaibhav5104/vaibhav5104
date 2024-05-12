@@ -1,26 +1,73 @@
+
 import React from "react";
+// import img2 from '../img/img2.jfif';
+// import img1 from '../img/img1.jfif';
 import '../style.css';
 import '../responsive.css';
+import img1 from "../img/carousel-img4.jpg";
+import img2 from "../img/carousel-img5.jpg";
+import img3 from "../img/carousel-img6.jpg";
 
-const Explore = () => {
+const About = () => {
+
     return(
         <>
-            <section className="explore" id="explore">
-            <div className="explore-content">
-                <h1>SUSTAINABLE EXPLORATION</h1>
+        <section id="about">
+            <div className="title">
+                <h1 className="font-color">Explore</h1>
                 <div className="line"></div>
-                <p style={{ fontSize:'1.3rem'}}>
-                Our website will provide the travelling suggestion as per the ones budget number of days he can spend in a particular city 
-                Firstly User will input the city he want to visit then secondely he will enter the budget and then the days 
-                after seeing the input our website will show a personalized suggestion as per the travaller need.
-                A person can book the tickets of the main tourist destination through the suggestion they can also choose the hotels they want to stay 
-                our website will also show the location on the map. we will also encourage them too travel eco friendly by opting the public transport electric vehicles etc.
-
-                </p>
+            </div>
+            <br />
+            <div id="about_us">
+                <div className="boxx">
+                    <div className="containerx">
+                        <input type="radio" name="slider" id="item-1" checked />
+                        <input type="radio" name="slider" id="item-2" />
+                        <input type="radio" name="slider" id="item-3" />
+                        <div className="cards">
+                            <label className="cardt" htmlFor="item-1" id="col-img-1">
+                                <img src={img1} alt="" />
+                            </label>
+                            <label className="cardt" htmlFor="item-2" id="col-img-2">
+                                <img src={img2} alt=""/>
+                            </label>
+                            <label className="cardt" htmlFor="item-3" id="col-img-3">
+                                <img src={img3} alt=""/>
+                            </label>
+                            
+                        </div>
+                    </div>
+                    <span id="about-quad">
+                        <a href="#home">
+                            <center>
+                                <h1
+                                    style={{
+                                        fontFamily: 'var(--ff-montserrat)',
+                                        color: 'white'
+                                    }}
+                                >
+                                    Find that
+                                </h1>
+                                <br />
+                                <img
+                                    className="img2"
+                                    src="./img/mountain_dark.jpg"
+                                    alt=""
+                                    width="200"
+                                    style={{ borderRadius: '12%' }}
+                                />
+                                <br />
+                                <h1 className="logo" style={{ fontSize: '50px' }}>
+                                    ADVENTURE
+                                </h1>
+                            </center>
+                        </a>
+                    </span>
+                </div>
             </div>
         </section>
         </>
     );
 }
 
-export default Explore;
+export default About;

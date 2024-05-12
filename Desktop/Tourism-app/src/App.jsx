@@ -1,17 +1,11 @@
 import React, { useEffect } from 'react';
 import Nav from './components/Navbar';
-import Home from './components/Home';
-import Event from './components/Events';
-import Explore from './components/Explore';
-import City from './components/City';
 import {
     handleSectionClick,
     handleAboutMouseOver,
     handleInputChange,
     toggleDarkMode,
     scrollFunction,
-    scrollToTop,
-    updateNavbar
 } from './utils';
 
 function App() {
