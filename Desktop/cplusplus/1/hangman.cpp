@@ -93,7 +93,8 @@ public:
         cout << "                                                                                             :"<<endl;
         cout << "                                                                                           ========"<<endl;
         cout<<"Guess a hidden Word having five alphabet "<<endl<<endl;
-        cout<<"Hint --> "<<"It is a green colored fruit"<<endl<<endl;
+        if(hidden_word == "grape") cout<<"Hint --> "<<"It is an green colored fruit"<<endl<<endl;
+        else cout<<"None"<<endl;
         cout<<"!!!You Will Get Five Attempts!!!"<<endl<<endl;
     }
 
