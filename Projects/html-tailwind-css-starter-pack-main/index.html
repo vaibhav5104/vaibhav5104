@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML & Tailwind CSS Starter Pack</title>
+
+    <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+ 
+    <!-- wrapper --> 
+    <div class="w-[100vw] h-[100vh]  flex flex-col items-center justify-center bg-[#344151] gap-10">
+        <div class="text-[#0398d4] text-[20px]">Increment And Decrement</div>
+
+            <div class="flex bg-white text-[25px] text-[#344151] rounded-sm p-3 gap-12 px-5">
+
+            <!-- <button onclick="decrement()" class="border-r-2 border-[#bfbfbf] pr-5  " > -->
+                <button id="decrement" class="border-r-2 border-[#bfbfbf] pr-5">
+                <i class="fa-solid fa-minus"></i>
+            </button>
+
+            <div id="example" class="font-bold">
+                 0
+            </div>
+
+            <!-- <button onclick="increment()" class="border-l-2 border-[#bfbfbf] pl-5"> -->
+                <button id="increment" class="border-l-2 border-[#bfbfbf] pl-5">
+
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
+        </div>
+
+        <button id="reset" class="flex bg-white text-[20px] rounded-sm p-1 gap-12 px-3 border-3  border-[#bfbfbf] text-blue-800 text-lg">reset</button>
+
+    </div>
+
+    <script src="https://kit.fontawesome.com/94d3153d27.js" crossorigin="anonymous"></script>
+    <!-- <script src="index.js"></script> -->
+    <script src="index1.js"></script>
+</body>
+
+</html>

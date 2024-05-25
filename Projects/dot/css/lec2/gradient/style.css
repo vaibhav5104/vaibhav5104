@@ -1,0 +1,28 @@
+.Box {
+    border: 1px solid black;
+    height: 200px;
+    width: 150px;
+    background-image: linear-gradient(Red,blue);
+    background-image: linear-gradient(to right,Red,blue);
+    background-image: linear-gradient(to bottom,rgb(255, 123, 0) 33%,rgb(255, 255, 255) 66%,green 100%);
+    background-image: repeating-linear-gradient(to top right,rgb(223, 69, 69),rgb(117, 234, 226) 33%);
+    /* background-position: 100px; */
+    /* background-repeat: repeat-x; */
+    background-position: 100vw;
+    /* background-image: linear-gradient(75deg,Red,blue,green); */
+    /* background-image: linear-gradient(to left,rgba(255,0,0,0),rgb(0, 60, 255)); */
+
+
+}
+
+.mydiv {
+    border: 1px solid black;
+    border-radius: 200px;
+    margin: 10px;
+    width: 300px;
+    height: 300px;
+    background-image: radial-gradient(circle,Red,blue,orange);
+    background-image: radial-gradient(yellow 5%,blue 25%,Red 70%);
+    background-image: conic-gradient(yellow 5%,Red 75%,blue 99%);
+    background-image: repeating-radial-gradient(Red,blue);
+}

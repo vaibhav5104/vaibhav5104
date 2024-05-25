@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#form {
+    background-color: rgb(221, 231, 231);
+    position: relative;
+}
+
+#input {
+    position: sticky;
+}

@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgb(241, 238, 238);
+}
+
+button {
+    font-size: larger;
+    color: rgb(0, 0, 0);
+    background-color: rgb(160, 67, 160);
+    /* font-weight:lighter; */
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px;
+    font: message-box;
+    border-style: none;
+    width: 10rem;
+    height: 3rem;
+    margin-top: 2rem;
+}
+button:hover {
+    transition-duration: .5s;
+    transition-timing-function:ease-in-out;
+    transform: scaleX(0.9);
+    /* height: 4rem; */
+    color: rgb(255, 255, 255);
+    font-weight: 900;
+    background-color: rgb(151, 49, 151);
+
+
+
+
+}
+
+h1{
+    /* font-size: larger; */
+    color: rgb(0, 0, 0);
+    /* background-color: magenta; */
+    font:bold;
+}
+ 
+.main{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    font-size: larger;
+    color: rgb(0, 0, 0);
+    /* background-color: magenta; */
+    /* font:bold; */
+    margin-top: 15rem;
+    margin-left: 40rem;
+    align-items:center;
+}
+
+.card{
+    display: flex;
+    flex-direction:column;
+    border: 2px solid black;
+    /* height: 300px; */
+    border-radius: 4px;
+    position: relative;
+    margin-top: 20px;
+    margin-left: 30px;
+    display: inline-flex;
+    border-style:dashed;
+    background-color: rgb(170, 71, 71);
+}
+a {
+    color: inherit; /* Use the same color as the surrounding text */
+    text-decoration: none; /* Remove underline */
+    outline: none; /* Remove focus outline */
+  }
+  

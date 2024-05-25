@@ -1,0 +1,71 @@
+*{
+    /* margin: 0;
+    padding: 0; */
+    box-sizing: border-box;
+
+}
+
+#sec1 {
+    border: 1px solid rgb(255, 255, 255);
+    margin: 10px;
+    margin-left: 350px;
+    padding: 5px;
+    padding-left: 20px;
+    box-sizing: content-box;
+    border-radius: 20px;
+    background-color: rgb(16, 14, 36);
+    width: 45%; 
+    height: 100%;
+
+}
+#image {
+    padding: 10px;
+    padding-bottom: 0%;
+    border-radius: 7%;
+}
+
+#button {
+    width: 500px;
+    height: 40px;
+    font-size: larger;
+    margin-left: 10px;
+    border-radius: 10px;
+    background-color: rgb(113, 113, 219);
+    color: white;
+    text-decoration: none;
+    cursor:pointer;
+}
+
+#amount {
+    color: white;
+    padding-left: 180px;
+    /* font-size:x-large; */
+    font-weight: 900;
+    font-size: 24px;
+}
+
+#sec2 {
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: x-large;
+    padding-left: 30px;
+
+}
+
+ul {
+    list-style-type:disc;
+}
+#sec1 p{
+    margin-left: 18px;
+    font-weight: 800;
+    font-size: larger;
+}
+
+#sec0 {
+    background-color: rgb(42, 80, 163);
+    margin: 0%;
+    padding: 0%;
+    /* width: 100c; */
+    width: 100%;
+    height:auto;
+}

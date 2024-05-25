@@ -1,0 +1,35 @@
+.container{
+    border: 2px solid red;
+    background-color: yellow;
+    height: 215px;
+    width: 100%;
+    display: flex;
+
+}
+
+.box{
+    height: 212px;
+    width: 212px;
+    border: 2px solid green;
+    background-color: aqua;
+
+    animation-name: vaibhav;
+    animation-duration: 6s; 
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+    animation-delay: 1s;
+    animation-direction:alternate;
+    /* animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
+    animation-fill-mode: both; */
+
+}
+
+@keyframes vaibhav {
+    from {
+        width: 212px;
+    }
+    to {
+        width: 100%;
+    }
+}
