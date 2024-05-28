@@ -3,7 +3,6 @@ import './style.css';
 
 function Card(props) {
     const { series, imgsrc ,titles ,link } = props;
-
     return (
 <div className='card'>
             <img src={imgsrc} alt={series} width="250px" height="350px"/>

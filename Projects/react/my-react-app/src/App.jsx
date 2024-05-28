@@ -16,7 +16,6 @@ function App(){
         <>
         <div className='main'>
         {/* setTimeout(Ctime,1000) */}
-        
 
         <h1>{currentTime}</h1>
         
