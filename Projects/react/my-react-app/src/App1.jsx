@@ -11,14 +11,19 @@ import React, { useState } from 'react';
 
 // const count = 0;
 
-
 function App() {
     // const state = useState();
-// let count = 1;  
+// let count = 1;
 let [count , setCount] = useState(0);
+let [count1 , setCount1] = useState(0);
 
 const IncNum = () => {
     setCount(parseFloat((count + 1.8).toFixed(2)));
+    // console.log("clicked" + count++);
+}
+
+const IncNum1 = () => {
+    setCount1(parseFloat((count1 + 1.8).toFixed(2)));
     // console.log("clicked" + count++);
 }
 
@@ -36,6 +41,8 @@ const IncNum = () => {
         
         <h1>{count}</h1>
         <button onClick={IncNum}>Click Me</button>
+        <h1>{count1}</h1>
+        <button onClick={IncNum1}>Click Me</button>
         
         
         </>
