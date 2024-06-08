@@ -1,3 +1,6 @@
+#ifndef HANGMAN_H
+#define HANGMAN_H
+
 #include <iostream>
 
 using namespace std;
@@ -12,9 +15,9 @@ vector<string> hidden_words{
         "paper",
     };
 
-    string hidden_word = hidden_words[0];
+string hidden_word = hidden_words[0];
 
-    vector<string> hint{
+vector<string> hint{
         "It is a green colored fruit",
         "Used to dry the body after the bath",
         "It's an animal with black and white stripes",
@@ -26,6 +29,7 @@ vector<string> hidden_words{
     
     };
 
+// int n = hidden_word.length();
 
     void introduce1() {
         cout << "  *       *    * * * * *    *       *    *********    *       *    * * * * *    *       *    ---------"<<endl;
@@ -36,7 +40,6 @@ vector<string> hidden_words{
         cout << "                                                                                             :"<<endl;
         cout << "                                                                                           ========"<<endl;
     }
-    
 
     void introduce2(){
         cout<<"Guess a hidden Word having five alphabet "<<endl<<endl;
@@ -50,7 +53,6 @@ vector<string> hidden_words{
         else if(hidden_word == hidden_words[7]) cout<<"Hint --> "<<hint[7]<<endl<<endl;
         cout<<"!!!You Will Get Five Attempts!!!"<<endl<<endl;
     }
-
 
     void fail1(){
         cout<<"  :         "<<endl;
@@ -101,3 +103,6 @@ vector<string> hidden_words{
         cout<<"  :        "<<endl;
         cout<<"__:____         "<<endl;
     }
+
+
+    #endif
