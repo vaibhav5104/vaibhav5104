@@ -1,84 +1,24 @@
 #include <iostream>
+#include <vector>
 #include <string>
 using namespace std;
-
-string hidden_words[8]{
-        "grape",
-        "towel",
-        "zebra",
-        "india",
-        "mango",
-        "vebus",
-        "light",
-        "paper",
-    };
-
-    void fail1(){
-        cout<<"  :         "<<endl;
-        cout<<"  :         "<<endl;
-        cout<<"  :        "<<endl;
-        cout<<"  :         "<<endl;
-        cout<<"  :        "<<endl;
-        cout<<"  :        "<<endl;
-        cout<<"__:____         "<<endl;
-    }
-    void fail2(){
-        cout<<"   _________"<<endl;
-        cout<<"  :         :"<<endl;
-        cout<<"  :         "<<endl;
-        cout<<"  :        "<<endl;
-        cout<<"  :         "<<endl;
-        cout<<"  :        "<<endl;
-        cout<<"  :        "<<endl;
-        cout<<"__:____         "<<endl;
-    }
-    void fail3(){
-        cout<<"   _________"<<endl;
-        cout<<"  :         :"<<endl;
-        cout<<"  :         0"<<endl;
-        cout<<"  :        "<<endl;
-        cout<<"  :         "<<endl;
-        cout<<"  :        "<<endl;
-        cout<<"  :        "<<endl;
-        cout<<"__:____         "<<endl;
-    }
-    void fail4(){
-        cout<<"   _________"<<endl;
-        cout<<"  :         :"<<endl;
-        cout<<"  :         0"<<endl;
-        cout<<"  :        \\:/"<<endl;
-        cout<<"  :         "<<endl;
-        cout<<"  :        "<<endl;
-        cout<<"  :        "<<endl;
-        cout<<"__:____         "<<endl;
-    }
-    void fail5(){
-        cout<<"   _________"<<endl;
-        cout<<"  :         :"<<endl;
-        cout<<"  :         0"<<endl;
-        cout<<"  :        \\:/"<<endl;
-        cout<<"  :         :"<<endl;
-        cout<<"  :        / \\"<<endl;
-        cout<<"  :        "<<endl;
-        cout<<"__:____         "<<endl;
-    }
+#include "hangman.h"
+// #include "searching.h"
+//try to add words from the user
 
 class Hangman {
 private:
-        string hidden_word = hidden_words[0];
-        int n = hidden_word.length();
-        int i;
-        int p = 0;
+        int i,p = 0,n = hidden_word.length();
         char attempt = '1';
+        char latter[5] = {'_','_','_','_','_'};
         char key,opt;
-    char latter[5] = {'_','_','_','_','_'};
+        string newWord,newHint;
+        int j = 0;
     
 
 public:
-        int j = 0;
 
-
-
+    
     void setX(string str){
         str = hidden_word;
     }
@@ -87,32 +27,17 @@ public:
         attempt = this->attempt ;
     }
 
-    void introduce1() {
-        cout << "  *       *    * * * * *    *       *    *********    *       *    * * * * *    *       *    ---------"<<endl;
-        cout << "  *       *    *       *    * *     *    *            * *   * *    *       *    * *     *    :        :"<<endl;
-        cout << "  * * * * *    * * * * *    *   *   *    *    ****    *   *   *    * * * * *    *   *   *    :        0"<<endl;
-        cout << "  *       *    *       *    *     * *    *       *    *       *    *       *    *     * *    :       \\:/"<<endl;
-        cout << "  *       *    *       *    *       *    *********    *       *    *       *    *       *    :       / \\  "<<endl;
-        cout << "                                                                                             :"<<endl;
-        cout << "                                                                                           ========"<<endl;
-    }
-
-    void introduce2(){
-        cout<<"Guess a hidden Word having five alphabet "<<endl<<endl;
-        if(hidden_word == hidden_words[0]) cout<<"Hint --> "<<"It is a green colored fruit"<<endl<<endl;
-        else if(hidden_word == hidden_words[1]) cout<<"Hint --> "<<"Used to dry the body after the bath"<<endl<<endl;
-        else if(hidden_word == hidden_words[2]) cout<<"Hint --> "<<"It's an animal with black and white stripes"<<endl<<endl;
-        else if(hidden_word == hidden_words[3]) cout<<"Hint --> "<<"country of himalayas and ganges"<<endl<<endl;
-        else if(hidden_word == hidden_words[4]) cout<<"Hint --> "<<"Known as king of fruits"<<endl<<endl;
-        else if(hidden_word == hidden_words[5]) cout<<"Hint --> "<<"second planet of solar system"<<endl<<endl;
-        else if(hidden_word == hidden_words[6]) cout<<"Hint --> "<<"fastest thing of universe"<<endl<<endl;
-        else if(hidden_word == hidden_words[7]) cout<<"Hint --> "<<"made of wood and used for writing"<<endl<<endl;
-        cout<<"!!!You Will Get Five Attempts!!!"<<endl<<endl;
-    }
+    void intro1(){
+        introduce1();
+    } 
+    void intro2(){
+        introduce2();
+    } 
 
     void process(int& p,char& key,int& i){
         cout << "Pick a latter : ";
         cin >> key;
+
 
     for (i = 0; i < n; i++) {
         if (hidden_word[i] == key) {
@@ -123,9 +48,11 @@ public:
         }
     }
     cout<<endl;
-    }
     
-    void searching(string hidden_word,char attempt){
+}
+
+
+void searching(string hidden_word,char attempt){
         // introduce2();
         
     switch (attempt){
@@ -158,8 +85,6 @@ case '1':
     } else {
         cout <<"Hurray! You found the word"<< endl;
                 choise(latter);
-
-
     }
 
     } else {
@@ -377,8 +302,27 @@ case '1':
             latter[i] = '_';  // Resetting the latter array
         }
         j++;
-        // cout<<j<<endl;
+        cout<<j<<endl;
+
+        cout<<"Do you want to add new words ?\n 1. Y --> Yes \n 2. Any key --> No"<<endl<<endl;
+        cin>>opt;
+        if(opt == 'y' || opt == 'Y') {
+            cout<<"Enter word to guess : ";
+            cin>>newWord;
+            cout<<"Enter hint : ";
+            cin>>newHint;
+
+            hidden_words.push_back(hidden_words[j]);
+            hint.push_back(hint[j]);
+
+            hidden_words[j] = newWord;
+            hint[j] = newHint;
+
+        }
         hidden_word = hidden_words[j];
+
+
+
         introduce2();
          
         this->searching(hidden_word, attempt);
@@ -396,8 +340,8 @@ int main() {
     five_latter_word.setX(hidden_word);
     five_latter_word.setAttempt(attempt);
 
-    five_latter_word.introduce1();
-    five_latter_word.introduce2();
+    five_latter_word.intro1();
+    five_latter_word.intro2();
     five_latter_word.searching(hidden_word,attempt);
 
     return 0;

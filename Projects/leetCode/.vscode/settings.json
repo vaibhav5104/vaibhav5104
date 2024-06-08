@@ -57,6 +57,7 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
+    "*.embeddedhtml": "html",
     "iostream": "cpp",
     "deque": "cpp",
     "string": "cpp",
@@ -118,7 +119,8 @@
     "unordered_set": "cpp",
     "regex": "cpp",
     "valarray": "cpp",
-    "stacktrace": "cpp"
+    "stacktrace": "cpp",
+    "bitset": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
