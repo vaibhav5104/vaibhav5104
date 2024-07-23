@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './changeColor';
+import Todo from './Todo.jsx';
 import { StrictMode } from 'react';
 // import { createRoot } from 'react-dom/client';
-// import './style.css'
+import './style.css'
 
 
 ReactDOM.render(
     <>
         <StrictMode>
-  <App />
+  <Todo />
 </StrictMode>
     </>,
     document.getElementById('root')

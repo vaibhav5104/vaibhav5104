@@ -10,7 +10,7 @@ function Card(props) {
                 <p>{titles}</p>
                 <p>{series}</p>
                 <button>
-                    <a href={link} target='_blank'>Watch Now</a>
+                    <a href={link} target='_blank' rel="noreferrer">Watch Now</a>
                 </button>
             </div>
         </div>
