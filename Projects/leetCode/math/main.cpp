@@ -1,48 +1,43 @@
 /* #include <iostream>
+#include <vector>
 using namespace std;
-int mySqrt(int x) {
-        if (x == 0 || x == 1) 
-            return x;
 
-        int k = 0;
-        for (int i = 0; i <= x; i++) {
-            if ((long long)i * i == x) { 
-                k = i;
-                break;
-            } else if ((long long)i * i > x) {
-                k = i - 1;
-                break;
+int maxSubArray(vector<int>& nums) {
+
+    int el,p=0,sum=0,n = nums.size();
+
+    for (size_t i = 0; i < n; i++)
+    {
+        
+        sum += nums[i];
+
+        if(sum <= 0){
+            sum = 0;
+            if(el < 0) {
+                el = nums[i];
             }
+        }else if(sum >0 && nums[i] > 0){
+            p = sum;
         }
-        return k;
+
+
+
+
     }
+            
+
+
+
+    }
+
+
+
+
 int main() {
 
-    int x;
-    cin>>x;
-
-    int res  = mySqrt(x);
-
-    cout<<res<<endl;
-
+    // Your code here
+    cout<<"HI";
     return 0;
 } */
-#include <iostream>
-using namespace std;
 
-int func(int a){
-    cout<<a<<endl;
 
-    return a;
-}
-
-int main() {
-
-    double x;
-    cin>>x;
-    int result = func(x);
-
-    cout<<"Result : "<<result<<endl;
-
-    return 0;
-}

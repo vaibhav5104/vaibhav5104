@@ -95,8 +95,8 @@ a {
   display: flex;
   justify-content: center;
 } */
-
-* {
+/* 
+{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -127,7 +127,6 @@ a {
     font-size: 3.2rem;
     font-weight: bold;
   }
-  /* states  */
   
   
   .todo-container {
@@ -188,7 +187,6 @@ a {
     letter-spacing: 0.1rem;
     border: none;
     outline: none;
-    /* border-radius: 15; */
     border-top-left-radius: 17px;
     border-bottom-left-radius: 17px;
     max-width: 500px;
@@ -243,15 +241,11 @@ a {
   
   .todo-list {
     min-width: 25%;
-    /* To remove the bullets of unordered list */
     list-style: none;
   }
   
   .todo-item {
     margin: 2.4rem;
-    /*word-wrap: break-word;
-      */ /*flex-wrap: wrap;
-      */
     font-size: 20px;
     color: #1c2833;
     border-radius: 30px;
@@ -264,8 +258,6 @@ a {
     grid-template-columns: 1fr 0.3fr 0.3fr;
     justify-content: start;
     gap: 1.6rem;
-    /*align-items: center;
-      */ /*wrapsthelinks*/
     overflow-wrap: anywhere;
   }
   
@@ -318,4 +310,169 @@ a {
   
   .clear-btn:hover {
     background-color: #8d1407;
-  }
+  } */
+
+  input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+  *{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.main_div{
+    width: 100%;
+    height: 100vh;
+    background-color: #6989aa;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.center_div {
+    width: 25%;
+    height: 80vh;
+    background-color: #f4f4f4;
+    box-shadow: 5px 5px 25px -5px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+}
+
+h1 {
+    color: white;
+    background: transparent;
+    background-color: #8566aa;
+    padding: 6px 0 2px;
+    margin-bottom: 10px;
+    box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.5);
+}
+
+.navbar {
+  /* font-style: italic; */
+  color: black;
+}
+
+.navbar:hover {
+  font-style: italic;
+  color: rgb(47, 91, 187);
+}
+
+input  {
+    text-align: center;
+    height: 30px;
+    top: 10px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: italic;
+    width: 60%;
+    border-bottom: 2px solid #8566aa;
+    outline: none;
+}
+
+.middle{
+  position:relative;
+  top: 35vh;
+  left: 50%;
+  
+  /* justify-content: center; */
+  /* align-items: center; */
+  max-width: fit-content;
+  max-height: fit-content;
+}
+
+button {
+    min-height: 40px;
+    min-width: 45px;
+    border-radius: 50%;
+    border-color: transparent;
+    background-color: #8566aa;
+    color: #fff;
+    font-size: 40px;
+    border: none;
+    outline: none;
+    font-size: medium;
+    margin-left: 10px;
+    box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    background-color: #20bf6b;
+}
+
+.btn-component {
+  color: red; /* Hover background color */
+  
+}
+
+.MuiButton-root.btn-component:hover {
+  background-color: rgb(97, 182, 170); /* Hover background color */
+}
+.MuiButton-root.add-btn-component {
+  background-color: rgb(38, 179, 49); /* Hover background color */
+}
+.iconButton {
+  background-color: rgb(255, 255, 255); /* Hover background color */
+}
+
+
+ol {
+    margin-top: 30px;
+    list-style: none;
+}
+
+ol li {
+    padding-left: 0px;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 500;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    color: #8566aa;
+    text-transform: capitalize;
+}
+
+.todo_style {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.todo_style .fa-times-circle {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #8566aa; */
+    border-radius: 50%;
+    margin: 0 15px 0 35px;
+    /* color: aliceblue; */
+    /* box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3); */
+}
+
+.todo_style .fa-times-circle {
+    font-size: 22px;
+    /* background-color: crimson; */
+}
+.todo_style .fa-times-circle:hover {
+    /* font-size: 22px; */
+    /* background-color: crimson; */
+    color: red;
+
+}
+
+.todo_style .fa-times-circle:hover .list_style {
+    color: crimson;
+}
