@@ -1,0 +1,4 @@
+Hi , this is text file
+text file can be appended by appendFileSync
+text file can be appended by appendFileSync
+text file can be appended by appendFileSync
