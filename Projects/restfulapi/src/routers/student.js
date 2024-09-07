@@ -4,7 +4,6 @@ const Student = require("../models/students")
 // 1: create a new router
 const router = new express.Router()
 
-
 // create a new students through promises
 
 // router.post("/students",(req,res) => {

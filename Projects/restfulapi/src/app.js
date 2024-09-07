@@ -7,7 +7,7 @@ const validator = require("validator")
 const port = process.env.PORT || 8000;
 const studentRouter = require("./routers/student")
 
-app.use(express.json())
+app.use(express.json())// without writing it , it will give undefined data
 
 // 3: we need to register our router
 app.use(studentRouter)
