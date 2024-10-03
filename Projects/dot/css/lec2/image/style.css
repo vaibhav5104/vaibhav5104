@@ -1,0 +1,44 @@
+.box {
+    background-image:linear-gradient(red 40% , blue 74%);
+    width: 300px;
+    height: 200px;
+    border:1px solid blue;
+    position: relative;
+    top: 10vw;
+    left: 40vw;
+}
+
+#Text1 {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+#Text2 {
+    
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}
+#Text3 {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+
+}
+#Text4 {
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+}
+#Text5 {
+    
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+}

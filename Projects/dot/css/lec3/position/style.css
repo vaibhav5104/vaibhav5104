@@ -1,0 +1,41 @@
+/* p {
+    position: static;
+}
+ */
+
+
+div {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+    border: 1px solid black;
+
+}
+
+ .box {
+    position: relative;
+/*     left:15px;
+    top: 10px; */
+ }
+
+#box1 {
+    position: absolute;
+}
+#box2 {
+    position: absolute;
+    z-index: 2;
+}
+#box3 {
+    position: absolute;
+    z-index: 3;
+}
+#box4 {
+    position: absolute;
+}
+.extra {
+    width: 100vw;
+    height: 2000px;
+    background-color: green;
+    overflow-x: hidden;
+}

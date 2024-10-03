@@ -1,0 +1,54 @@
+hvds*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box ;
+    /* If the wodth of box is 150px and border is 2px.box-sizing: border-box ; will make the total of border and box width 
+    150px which means box width will decrease */
+}
+
+.container {
+    height: 400px;
+    border: 2px solid green;
+    display: flex;
+    /* flex-wrap: wrap; */
+
+    /* justify-content:flex-start; */
+    align-items: center;
+    /* flex-direction: column; */
+
+    /* gap: 10px; */
+
+    align-content: flex-start;
+
+}
+
+.box {
+    display: flex;
+    border: 1px solid brown;
+    background-color: aqua;
+    width: 25%;
+    text-align: center;
+    
+    /* flex-basis: 100px; *//* The only difference in flex-basis and width is that when we write something in flex-items more than max width
+    the size of flex-items will increase whereas in width the extra content will be hidden */
+    
+    flex-basis: 50%;/* It will make the width of flex-item 50% of the horixontal
+    but its border is takinig 1px extra which will not allow other item to take other half of area.To solve this we will use
+    border-box:box-sizing: ; */
+}
+
+#box1{
+    order: 2;  /* more the order more the item will goto the end  use mdn or lecture if forget */
+    /* flex-grow: 1; *//* items on which grow implemented will get the extra space whereas other items will remain same in size */
+    flex-shrink: 2;/* We can see that box1 will shrink faster than other.(We can see by increasing the width or seeing in html preview */
+    /* We have to removeflex-wrap to see flex-shrink working */
+    /* align-self: stretch; */
+    /* flex-basis: 50%; */
+
+}
+
+
+#box2 {
+    order: 8;
+    align-self: flex-end;/* align-content or align-item can overide align-self */
+}
