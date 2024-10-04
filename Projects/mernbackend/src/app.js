@@ -29,6 +29,8 @@ const hbs = require("hbs");
 require("./db/conn");
 const port = process.env.PORT || 8000;
 const Register = require("./models/registers")
+const bcrypt = require("bcryptjs")
+
 
 const static_path = path.join(__dirname, "../public");
 const template_path = path.join(__dirname, "../templates/views");
@@ -71,6 +73,7 @@ app.post("/register", async (req,res) => {
                 password : password,
                 confirmpassword : cpassword
             })
+            //password hashing is done after filling infos and before saving it
             const registered = await registerEmployee.save()
             res.status(201).render("index")
         }else {
@@ -95,7 +98,9 @@ app.post("/login",async  (req, res) => {
 
         const useremail = await Register.findOne({email:email})
 
-        if(useremail.password === password) {
+        const isMatch = bcrypt.compare(password,useremail.password)
+
+        if(isMatch) {
             res.status(201).render("index")
         }else {
             res.send("invalid login details")
@@ -122,6 +127,20 @@ app.get("*", (req,res) =>{
         errorMsg : "Opps! page not found, Click Here to go back"
     })
 })
+
+// const bcrypt = require("bcryptjs")
+// const securePassword = async (password) => {
+
+//     const passwordHash = await bcrypt.hash(password,10)
+//     console.log(passwordHash);
+
+//     const passwordmatch = await bcrypt.compare("thapa@123",passwordHash)
+//     console.log(passwordmatch);
+
+// }
+
+// securePassword("thapa@123")
+
 
 
 app.listen(port, () => {
