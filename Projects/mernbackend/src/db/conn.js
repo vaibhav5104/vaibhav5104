@@ -1,16 +1,8 @@
 const mongoose = require("mongoose")
-
-mongoose.connect("mongodb://localhost:27017/formRegistration")
+mongoose.connect("mongodb://localhost:27017/olympic")
 .then(()=> {
-    console.log(`connection successful`);
+    console.log("connection successful");
 })
 .catch((e)=>{
-    console.log(`no connection`);
+    console.log("no connection");
 })
-
-
-
-
-
-
-
