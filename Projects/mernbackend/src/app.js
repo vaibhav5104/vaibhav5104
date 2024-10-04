@@ -41,6 +41,7 @@ app.set('view engine', 'hbs');
 app.set("views", template_path);
 hbs.registerPartials(partials_path);
 
+
 // console.log(static_path);
 app.use(express.static(static_path));
 
@@ -84,6 +85,25 @@ app.post("/register", async (req,res) => {
 
 app.get("/login",(req,res) => {
     res.render("login")
+})
+
+app.post("/login",async  (req, res) => {
+    try {
+        
+        const email = req.body.email
+        const password = req.body.password
+
+        const useremail = await Register.findOne({email:email})
+
+        if(useremail.password === password) {
+            res.status(201).render("index")
+        }else {
+            res.send("invalid login details")
+        }
+
+    } catch (error) {
+        res.status(500).send("invalid login details")
+    }
 })
 
 

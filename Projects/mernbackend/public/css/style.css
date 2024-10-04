@@ -10,6 +10,17 @@ body {
   font-size: 0.925rem;
 }
 
+.button-block{
+  background-color: rgb(158, 58, 58);
+  color: rgb(255, 255, 255);
+  font-size: larger;
+  font-weight: bolder;
+  border-radius: 3px;
+  border-style: none;
+  width: 6rem;
+  margin-left: 30px;
+}
+
 a {
   text-decoration: none;
 }
@@ -337,7 +348,7 @@ a {
   margin-top: 5%;
   margin-bottom: 5%;
 }
-.login-form-1{
+.log1in-form-{
   padding: 5%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
