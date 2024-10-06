@@ -22,6 +22,7 @@ app.listen(port,() => {
     console.log(`Server is running at port no. ${port}`);
 })*/
 
+require("dotenv").config()
 const path = require('path');
 const express = require('express');
 const app = express();
@@ -30,11 +31,14 @@ require("./db/conn");
 const port = process.env.PORT || 8000;
 const Register = require("./models/registers")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 
 
 const static_path = path.join(__dirname, "../public");
 const template_path = path.join(__dirname, "../templates/views");
 const partials_path = path.join(__dirname, "../templates/partials");
+
+
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
@@ -43,7 +47,7 @@ app.set('view engine', 'hbs');
 app.set("views", template_path);
 hbs.registerPartials(partials_path);
 
-
+console.log(process.env.SECRET_KEY);
 // console.log(static_path);
 app.use(express.static(static_path));
 
@@ -71,10 +75,12 @@ app.post("/register", async (req,res) => {
                 phone : req.body.phone,
                 age : req.body.age,
                 password : password,
-                confirmpassword : cpassword
+                confirmpassword : cpassword,
             })
             //password hashing is done after filling infos and before saving it
+            const token = await registerEmployee.generateAuthToken()
             const registered = await registerEmployee.save()
+            console.log("the page part : "+registered);
             res.status(201).render("index")
         }else {
             res.send("passwords are not matching")
@@ -99,7 +105,9 @@ app.post("/login",async  (req, res) => {
         const useremail = await Register.findOne({email:email})
 
         const isMatch = bcrypt.compare(password,useremail.password)
-
+        // console.log("register : "+registerEmployee); will not work since it is declared in other fn
+        const token = await useremail.generateAuthToken()
+        console.log("the token part " + token);
         if(isMatch) {
             res.status(201).render("index")
         }else {
@@ -142,6 +150,20 @@ app.get("*", (req,res) =>{
 // securePassword("thapa@123")
 
 
+
+// const createToken = async () => {
+
+//     const token = await jwt.sign({_id:"vaibhav"},"123123123121331312312312312312312313121131231231312312123123",{
+//         expiresIn:"10 seconds"
+//     })
+//     console.log(token);
+
+//     const userVer = await jwt.verify(token,"123123123121331312312312312312312313121131231231312312123123")
+//     console.log(userVer);
+
+// }
+
+// createToken()
 
 app.listen(port, () => {
     console.log(`listening to the port no at ${port}`);
