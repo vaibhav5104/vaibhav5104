@@ -32,7 +32,8 @@ const port = process.env.PORT || 8000;
 const Register = require("./models/registers")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-
+const cookieParser = require("cookie-parser")
+const auth = require("./middleware/auth")
 
 const static_path = path.join(__dirname, "../public");
 const template_path = path.join(__dirname, "../templates/views");
@@ -41,18 +42,45 @@ const partials_path = path.join(__dirname, "../templates/partials");
 
 
 app.use(express.json())
+app.use(cookieParser())
 app.use(express.urlencoded({extended:false}))
 
 app.set('view engine', 'hbs');
 app.set("views", template_path);
 hbs.registerPartials(partials_path);
 
-console.log(process.env.SECRET_KEY);
+// console.log(process.env.SECRET_KEY);
 // console.log(static_path);
 app.use(express.static(static_path));
 
 app.get("", (req,res) =>{
     res.render('index')
+})
+
+app.get("/secret",auth,(req,res) => {
+    // console.log(`this is the cookie awesome ${req.cookies.jwt}`);//it holds only the latest token
+    res.render('secret')
+})
+
+app.get("/logout",auth,async (req,res) => {
+    try{
+        console.log(req.user)
+        //for single logout
+        // req.user.tokens = req.user.tokens.filter((currElement) => {
+        //     return currElement.token !== req.token//will store only tokens which aren't equal to current token
+        // })//it deletes the cookies of given token from mongoDB and device
+
+        //logout from all devices
+        req.user.tokens = []
+
+        res.clearCookie("jwt")
+        console.log("logout successfully")
+        await req.user.save()
+        res.render("login")
+    }catch(e){
+        res.status(500).send(e)
+        console.log(e)
+    }
 })
 
 app.get("/register",(req,res) => {
@@ -79,6 +107,16 @@ app.post("/register", async (req,res) => {
             })
             //password hashing is done after filling infos and before saving it
             const token = await registerEmployee.generateAuthToken()
+            //The res.cookie funciton is used to set the cookie name to value
+            // The value parameter may be a string or object cenverted to JSON.
+
+            // Syntax: 
+            // res.cookie(name,value,[options])
+            res.cookie("jwt",token,{
+                expires:new Date(Date.now() + 30000),
+                httpOnly:true
+            })
+            // console.log(cookie);
             const registered = await registerEmployee.save()
             console.log("the page part : "+registered);
             res.status(201).render("index")
@@ -88,6 +126,7 @@ app.post("/register", async (req,res) => {
 
     }catch(e){
         res.status(400).send(e)
+        console.log(e);
     }
 
 })
@@ -107,7 +146,12 @@ app.post("/login",async  (req, res) => {
         const isMatch = bcrypt.compare(password,useremail.password)
         // console.log("register : "+registerEmployee); will not work since it is declared in other fn
         const token = await useremail.generateAuthToken()
-        console.log("the token part " + token);
+        // console.log("the token part " + token);
+        res.cookie("jwt",token,{
+            expires:new Date(Date.now() + 300000),
+            httpOnly:true,
+            // secure:true
+        })
         if(isMatch) {
             res.status(201).render("index")
         }else {

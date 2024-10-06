@@ -62,7 +62,7 @@ employeeSchema.methods.generateAuthToken = async function() {
         await this.save()
         return token
     }catch(e){
-        res.send("the error part "+ e)
+        // res.send("the error part "+ e)
         console.log("the error part "+ e);
     }
 }
