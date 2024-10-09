@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <chrono>
 using namespace std;
 
 
@@ -25,7 +26,7 @@ int lowerBound(vector<int> arr,int x){
         }
 
 
-        /* 
+/* 
         int low = 0, high = arr.size() - 1;
 
 while (low <= high) {
@@ -46,7 +47,7 @@ while (low <= high) {
 // and high will point to the largest element smaller than x
 return high;  // If x is not found, this returns the position of the closest smaller element
 
- */
+*/
 
 
 
@@ -57,12 +58,19 @@ return high;  // If x is not found, this returns the position of the closest sma
 
 
 int main(){
-
+    
+    auto start = std::chrono::high_resolution_clock::now();
     
     vector<int> arr = {1,3,5,7,9,11,14,18,20};
     int result = lowerBound(arr,10);
 
     cout<<"Result is : "<<result<<endl;
+    
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = end - start;
+    std::cout << "Elapsed time: " << duration.count() << " seconds" << std::endl;
+    
+    
 
 
     return 0;
