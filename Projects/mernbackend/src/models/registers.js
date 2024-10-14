@@ -54,7 +54,7 @@ const employeeSchema = new mongoose.Schema({
 // static is used when we work with collection i.e. Register
 
 // generating tokens
-// will use funciton() because there is a need of this
+// will use funciton() because there is a need of "this"
 employeeSchema.methods.generateAuthToken = async function() {
     try{
         const token = jwt.sign({_id : this._id},process.env.SECRET_KEY)
