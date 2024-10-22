@@ -1,13 +1,21 @@
 import React, { useState } from "react"; // Import React and useState
 import { useAuth } from "../store/auth";
+import { useNavigate } from "react-router-dom";
+const URL = "http://localhost:3000/api/form/contact"
+
+
 
 export const Contact = () => {
 
-    const [contact,setContact] = useState({
+    const defaultContactFormData = {
         username:"",
         email:"",
         message:"",
-    })
+    }
+
+    const [contact,setContact] = useState(defaultContactFormData)
+
+    const navigate = useNavigate()
 
     const [userData,setUserData] = useState(true)
 
@@ -33,10 +41,38 @@ export const Contact = () => {
         })
 
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user);
+        // console.log(user);
+
+        try{
+        
+            const response = await fetch(URL,{
+                method:"POST",
+                headers:{
+                    "Content-Type" : "application/json",
+                },
+                body: JSON.stringify(contact)
+            })
+            
+            if(response.ok) {
+                setContact(defaultContactFormData)
+                const res_data = await response.json();
+                navigate("/")
+            }else {
+                alert("Invalid Credentials")
+                console.log("Invalid Credentials");
+            }
+
+        }catch(e){
+            console.log(e);
+        }
+
+
     }
+
+
+
 
     return(<>
         <section>

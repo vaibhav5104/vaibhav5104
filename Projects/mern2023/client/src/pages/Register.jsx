@@ -1,6 +1,9 @@
 import React, { useState } from "react"; // Import React and useState
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
+import { Error } from "./Error";
+import { toast } from "react-toastify";
+
 
 
 const URL = "http://localhost:3000/api/auth/register"
@@ -39,15 +42,16 @@ export const Register = () => {
                 },
                 body : JSON.stringify(user)
             })
+            const res_data = await response.json()
             
             if(response.ok){
-                const res_data = await response.json()
                 storeTokenInLS(res_data.token)
-
                 setUser({username:"",email:"",phone:"",password:""})
-                navigate("/login")
+                toast.success("Registration successful")
+                navigate("/")
             }else{
                 console.log(response);
+                toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message)
             }
 
         }catch(e){
