@@ -16,7 +16,7 @@ const authMiddleware = async (req,res,next) =>{
  
     try{
         const isVarified = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY)
-        console.log(isVarified)
+        // console.log(isVarified)
 
         const userData = await User.findOne({email: isVarified.email}).
         select({
