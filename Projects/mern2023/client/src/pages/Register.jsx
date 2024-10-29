@@ -1,7 +1,6 @@
 import React, { useState } from "react"; // Import React and useState
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
-import { Error } from "./Error";
 import { toast } from "react-toastify";
 
 

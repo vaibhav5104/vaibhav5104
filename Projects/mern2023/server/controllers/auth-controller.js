@@ -26,7 +26,7 @@ const register = async (req,res) => {
         // const hash_password = await bcrypt.hash(password,saltRound)
 
         const userCreated = await User.create({username,email,phone,password})
-        console.log(userCreated);
+        // console.log(userCreated);
         // const data = req.body
         res
     .status(201)
@@ -54,8 +54,8 @@ const login = async (req,res) => {
         // const user = await bcrypt.compare(password,userExist.password)
         const user = await userExist.comparePassword(password)
 
-        console.log("password : "+ password);
-        console.log("userExist.password : "+ userExist.password);
+        // console.log("password : "+ password);
+        // console.log("userExist.password : "+ userExist.password);
 
         if(user) {
             res
@@ -83,7 +83,7 @@ const user = async (req, res) => {
     try {
       // const userData = await User.find({});
       const userData = req.user;
-      console.log(userData);
+    //   console.log(userData);
       return res.status(200).json({ userData });
     } catch (error) {
       console.log(` error from user route ${error}`);

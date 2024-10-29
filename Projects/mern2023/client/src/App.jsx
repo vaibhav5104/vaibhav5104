@@ -9,6 +9,10 @@ import { Navbar } from "./components/Navbar"
 import { Error } from "./pages/Error"
 import { Footer } from "./components/footer/Footer"
 import { Logout } from "./pages/Logout"
+import { AdminLayout } from "./components/layouts/Admin-Layout"
+import {AdminUsers} from "./pages/Admin-Users"
+import {AdminContacts} from "./pages/Admin-Contacts"
+import {AdminServices} from "./pages/Admin-Services"
 
 const App = () => {
 
@@ -24,14 +28,16 @@ const App = () => {
             <Route path="/register" element={<Register/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/logout" element={<Logout/>} />
+            <Route path="/admin" element={<AdminLayout/>}>
+              <Route path="users" element={<AdminUsers/>}/>
+              <Route path="contacts" element={<AdminContacts/>}/>
+              <Route path="services" element={<AdminServices/>}/>
+            </Route>
             <Route path="*" element={<Error/>} />
           </Routes>
         <Footer/>
         </BrowserRouter>
-
   </>)
-
-
 }
 
 export default App

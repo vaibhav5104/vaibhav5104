@@ -12,7 +12,7 @@ const authMiddleware = async (req,res,next) =>{
 
     // assumming token is in the format "Bearer <jwtToken> the we have to remove "Bearer " prefix"
     const jwtToken = token.replace("Bearer","").trim()
-    console.log("token from auth middleware" , token);
+    // console.log("token from auth middleware" , token);
  
     try{
         const isVarified = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY)
@@ -23,15 +23,18 @@ const authMiddleware = async (req,res,next) =>{
             password:0
         })
 
+        if(userData.isAdmin === "true"){
+
+        }
+
         // custom properties
         req.user = userData
         req.token = token
         req.userID = userData._id
 
-
         next()
     }catch(e){
-        return res.status(401).json({message: "Unauthorixed. Invalid token."})
+        return res.status(401).json({message: "Unauthorized. Invalid token."})
     }
 }
 module.exports = authMiddleware

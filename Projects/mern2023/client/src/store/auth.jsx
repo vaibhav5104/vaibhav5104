@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext()
+//In contextAPI if we diefine a variable in it, we can use it anywhere
 
 export const AuthProvider = ({children}) => {
     const [token,setToken] = useState(localStorage.getItem("token"))
     const [user,setUser] = useState("")
     const [services,setServices] = useState([])
+    const authorizationToken = `Bearer ${token}`
 
 
     const storeTokenInLS = (serverToken) => {
@@ -27,7 +29,7 @@ export const AuthProvider = ({children}) => {
             const response = await fetch("http://localhost:3000/api/auth/user",{
                 method: "GET",
                 headers: {
-                    Authorization : `Bearer ${token}`,
+                    Authorization : authorizationToken,
                 },
             })
 
@@ -65,7 +67,7 @@ export const AuthProvider = ({children}) => {
         getServices();
     },[token])
 
-    return <AuthContext.Provider value={{isLoggedIn,storeTokenInLS,LogoutUser,user,services}} >
+    return <AuthContext.Provider value={{isLoggedIn,storeTokenInLS,LogoutUser,user,services,authorizationToken}} >
         {children}
     </AuthContext.Provider>
 }
