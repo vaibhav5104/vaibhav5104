@@ -35,6 +35,7 @@ export const AuthProvider = ({children}) => {
 
             if(response.ok) {
                 const data = await response.json()
+                console.log("data.userData is "+data.userData);
                 setUser(data.userData)
             }
 
@@ -54,7 +55,7 @@ export const AuthProvider = ({children}) => {
             if(response.ok) {
                 const data = await response.json()
                 setServices(data.msg)
-                console.log(data.msg);
+                // console.log(data.msg);
             }
         } catch (error) {
             console.log(`services frontend error ${error}`);
@@ -63,6 +64,7 @@ export const AuthProvider = ({children}) => {
     }
 
     useEffect(() => {
+        // console.log("current token : ",token);
         userAuthentication()
         getServices();
     },[token])

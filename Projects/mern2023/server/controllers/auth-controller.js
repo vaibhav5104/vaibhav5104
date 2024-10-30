@@ -83,6 +83,8 @@ const user = async (req, res) => {
     try {
       // const userData = await User.find({});
       const userData = req.user;
+    //   const users = await User.find({}, {password:0})
+
     //   console.log(userData);
       return res.status(200).json({ userData });
     } catch (error) {
@@ -90,4 +92,20 @@ const user = async (req, res) => {
     }
   };
 
-module.exports = {home,register,login,user}
+  const userId = async (req, res) => {//delete the user By Id
+    try {
+        console.log("id : "+req.params._id);
+        const userIdData = await User.findByIdAndDelete(req.params.id);
+
+        if (!userIdData) {
+            return res.status(404).json({msg : "No userIdData "});  // Send 404 if the student is not found
+        }
+
+        res.status(200).json({userIdData});  // Use 200 for successful data retrieval
+    } catch (e) {
+        res.status(400).json({e});  
+    }
+}
+
+
+module.exports = {home,register,login,user,userId}
