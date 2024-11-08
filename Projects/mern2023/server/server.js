@@ -22,7 +22,6 @@ app.use("/api/auth",authRoute)
 app.use("/api/form",contactRoute)
 app.use("/api/data",serviceRoute)
 
-//lets define admin route
 app.use("/api/admin",adminRoute)
 
 app.use(errorMiddleware)

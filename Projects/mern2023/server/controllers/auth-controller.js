@@ -12,7 +12,7 @@ const home = async (req,res) => {
     }
     
 }
- 
+
 const register = async (req,res) => {
     try{
         const {username,email,phone,password} = req.body
@@ -66,7 +66,7 @@ const login = async (req,res) => {
             userId:userExist._id.toString(),
              })
         }else {
-            console.log("user does exist");
+            // console.log("user does exist");
             res.status(401).json({message : "Invalid Credentials"})
         }
 
@@ -92,20 +92,5 @@ const user = async (req, res) => {
     }
   };
 
-  const userId = async (req, res) => {//delete the user By Id
-    try {
-        console.log("id : "+req.params._id);
-        const userIdData = await User.findByIdAndDelete(req.params.id);
 
-        if (!userIdData) {
-            return res.status(404).json({msg : "No userIdData "});  // Send 404 if the student is not found
-        }
-
-        res.status(200).json({userIdData});  // Use 200 for successful data retrieval
-    } catch (e) {
-        res.status(400).json({e});  
-    }
-}
-
-
-module.exports = {home,register,login,user,userId}
+module.exports = {home,register,login,user}

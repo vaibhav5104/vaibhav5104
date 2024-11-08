@@ -16,9 +16,4 @@ router
     .route("/user")
     .get( authMiddleware,authcontrollers.user)
 
-router
-    .route("/user/:id")
-    .delete(authMiddleware,authcontrollers.userId);
-
-
 module.exports = router

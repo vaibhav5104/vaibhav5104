@@ -386,7 +386,7 @@ a.active {
 .adminContainer {
   display: grid;
   padding-top: 0;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 3fr; 
 }
 
 .adminList {
@@ -513,13 +513,21 @@ table {
   -o-border-radius: 1rem;
 }
 
+.scrollable-message {
+  max-height: 5rem; /* Adjust height as needed */
+  overflow-y: auto;
+  text-align: left; /* Optional for better readability */
+  padding-right: 1rem; /* Optional for scroll bar spacing */
+  text-decoration-style: none;
+}
+
 .admin-contacts-section {
   padding: 2rem;
 }
 
 .admin-contacts-section tr {
   display: grid;
-  grid-template-columns: repeat(4, minmax(10rem, 1fr));
+  grid-template-columns: repeat(5, minmax(20rem, 2fr));
   align-items: center;
   box-shadow: 0 0.3rem 0 grey;
   margin-bottom: 10px;

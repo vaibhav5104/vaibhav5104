@@ -5,7 +5,7 @@ const authMiddleware = async (req,res,next) =>{
 
     const token = req.header('Authorization')
 
-    if(!token) {
+    if(!token) {console
         return res.status(401)
         .json({message: "Unauthorized HTTP, Token not provided"})
     }

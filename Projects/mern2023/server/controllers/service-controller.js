@@ -1,19 +1,20 @@
-const Service = require("../models/service-model")
+const Service = require("../models/service-model");
 
-const services = async (req,res) => {
+const services = async (req, res) => {
+  try {
+    const response = await Service.find();
 
-    try{
-        const response = await Service.find()
-        if(!response){
-            res.status(404).json({msg : "No service found"})
-            // console.log("error from service ");
-            return 
-        }
-        res.status(200).json({msg : response})
-    }catch(error){
-        console.log(`services error : ${error}`);
+    // Check if the response is empty
+    if (response.length === 0) {
+      return res.status(404).json({ msg: "No services found" });
     }
 
-}
+    // If services are found
+    res.status(200).json({ msg: "Services fetched successfully", data: response });
+  } catch (error) {
+    console.error(`Services error: ${error}`);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
-module.exports = services
+module.exports = services;
