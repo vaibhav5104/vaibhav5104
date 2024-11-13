@@ -1,5 +1,4 @@
 import React, { useState } from "react"; // Import React and useState
-const URL = "http://localhost:3000/api/auth/login"
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import { toast } from "react-toastify";
@@ -12,7 +11,7 @@ export const Login = () => {
     })
 
     const navigate = useNavigate()
-    const {storeTokenInLS} = useAuth()//not an inbuilt hook
+    const {storeTokenInLS,API} = useAuth()//not an inbuilt hook
 
     const handleInput = (e) => {
         let name = e.target.name
@@ -28,7 +27,7 @@ export const Login = () => {
         e.preventDefault();
         // console.log(user);
         try{
-            const response = await fetch(URL,{
+            const response = await fetch(`${API}/api/auth/login`,{
                 method:"POST",
                 headers:{
                     "Content-Type" : "application/json",

@@ -3,7 +3,6 @@ const adminController = require("../controllers/admin-controller")
 const authMiddleware = require("../middlewares/auth-middleware")
 const adminMiddleware = require("../middlewares/admin-middleware")
 
- 
 const router = express.Router()
 
 router
@@ -21,12 +20,17 @@ router
 router
     .route("/users/delete/:id")
     .delete(authMiddleware,adminMiddleware,adminController.deleteUserById);
-    
+
+router
+    .route('/services/add')
+    .post(authMiddleware,adminMiddleware ,adminController.postServices)
+
 router
     .route('/contacts')
     .get(authMiddleware,adminMiddleware ,adminController.getAllContacts)
 
 router
-    .route('/services')
-    .post(authMiddleware,adminMiddleware ,adminController.postServices)
+    .route('/contacts/delete/:id')
+    .delete(authMiddleware,adminMiddleware,adminController.deleteContactById)
+
 module.exports = router

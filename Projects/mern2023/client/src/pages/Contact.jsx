@@ -1,8 +1,7 @@
 import React, { useState } from "react"; // Import React and useState
 import { useAuth } from "../store/auth";
 import { useNavigate } from "react-router-dom";
-const URL = "http://localhost:3000/api/form/contact"
-
+import { toast } from "react-toastify";
 
 
 export const Contact = () => {
@@ -19,7 +18,7 @@ export const Contact = () => {
 
     const [userData,setUserData] = useState(true)
 
-    const {user} = useAuth() 
+    const {user,API} = useAuth() 
 
     if(userData && user){
         setContact({
@@ -47,7 +46,7 @@ export const Contact = () => {
 
         try{
         
-            const response = await fetch(URL,{
+            const response = await fetch(`${API}/api/form/contact`,{
                 method:"POST",
                 headers:{
                     "Content-Type" : "application/json",
@@ -58,9 +57,10 @@ export const Contact = () => {
             if(response.ok) {
                 setContact(defaultContactFormData)
                 const res_data = await response.json();
+                toast.success(res_data.message)
                 navigate("/")
             }else {
-                alert("Invalid Credentials")
+                toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message)
                 console.log("Invalid Credentials");
             }
 

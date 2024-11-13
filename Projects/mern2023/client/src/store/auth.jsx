@@ -5,12 +5,14 @@ export const AuthContext = createContext();
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [services, setServices] = useState([]);
   const authorizationToken = `Bearer ${token}`;
 
   const API = "http://localhost:3000";
+  // const API = import.meta.env.VITE_API_URI_API;
+  console.log("API Endpoint:", import.meta.env); 
 
   const storeTokenInLS = (serverToken) => {
     setToken(serverToken);
@@ -31,27 +33,28 @@ export const AuthProvider = ({ children }) => {
   const userAuthentication = async () => {
     try {
       setIsLoading(true);
-      // console.log("API is : "+API);
       const response = await fetch(`${API}/api/auth/user`, {
         method: "GET",
         headers: {
           Authorization: authorizationToken,
         },
       });
-
+  
       if (response.ok) {
         const data = await response.json();
-        // console.log("user data admin is : "+ (data.userData.isAdmin));
         setUser(data.userData);
-        setIsLoading(false);
       } else {
         console.error("Error fetching user data");
-        setIsLoading(false);
+        setUser(null); // Explicitly set user to null if the request fails
       }
     } catch (error) {
       console.error("Error fetching user data");
+      setUser(null); // Handle fetch errors by setting user to null
+    } finally {
+      setIsLoading(false);
     }
   };
+  
 
   // to fetch the services data from the database
   const getServices = async () => {
@@ -85,7 +88,7 @@ export const AuthProvider = ({ children }) => {
         services,
         authorizationToken,
         isLoading,
-        // API,
+        API,
       }}
     >
       {children}

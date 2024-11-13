@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from "react"
-const URL = "http://localhost:3000/api/data/service"
+import React, { useEffect, useState } from "react";
+import {useAuth} from "../store/auth"
 
 export const Service = () => {
-    const defaultData = {
-        service:"",
-        description:"",
-        price:"",
-        provider:""
-    }
-
-    const [data,setData] = useState(defaultData);
+    const defaultData = [];
+    const [data, setData] = useState(defaultData);
+    const {API} = useAuth()
 
     const services = async () => {
         try {
-            const response = await fetch(URL, { method: "GET" });
-            // const result = response.find(services)
-            // const result = response.json()
+            const response = await fetch(`${API}/api/data/service`, { method: "GET" });
 
             if (response.ok) {
                 const ser_data = await response.json();
-                setData(ser_data.data)
+                setData(ser_data.data || []);
             } else {
                 console.error("Error:", response.status, response.statusText);
             }
@@ -27,75 +20,41 @@ export const Service = () => {
         } catch (error) {
             console.log(error);
         }
-
-    }
+    };
 
     useEffect(() => {
         services(); // Call services when the component mounts
     }, []); // Empty dependency array means this runs once on mount
 
-    return(<>
-              <section className="section-services">
-
-          <div className="container">
-
-            <h1 className="main-heading">Services </h1>
-
-          </div>
-      {data.length >= 0 ? (
-                data.map((service, index) => (
-                    <div key={index}>
-                    <div className="card-img">
-                    <img src="../../public/images/design.png" alt="desginer" width="200" />
-                    </div>
-                        <h2>{service.service}</h2>
-                        <p>Description: {service.description}</p>
-                        <p>Price: ${service.price}</p>
-                        <p>Provider: {service.provider}</p>
-                    </div>
-                ))
-            ) : (
-                <p>No services available</p>
-            )}
+    return (
+        <>
+            <section className="section-services">
+                <div className="container">
+                    <h1 className="main-heading">Services</h1>
+                </div>
+                <div className="container grid grid-three-cols">
+                    {data.length > 0 ? (
+                        data.map((service, index) => (
+                            <div className="card" key={index}>
+                                <div className="card-img">
+                                    <img src="../../public/images/design.png" alt="designer" width="200" />
+                                </div>
+                                <div className="card-details">
+                                    <div className="grid grid-two-cols">
+                                        <p>{service.provider}</p>
+                                        <p>{service.price}</p>
+                                    </div>
+                                    <h2>{service.service}</h2>
+                                    <p>{service.description}</p>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No services available</p>
+                    )}
+                </div>
             </section>
-    </>)
-}
-
-{/* // import { useAuth } from "../store/auth";
-// // const img = require("../../public/images/design.png")
-
-// export const Service = () => { */}
-{/* //   const { services } = useAuth(); */}
-
-{/* //   return ( */}
-    {/* // <section className="section-services"> */}
-      {/* <div className="container"> */}
-        {/* <h1 className="main-heading">Services </h1> */}
-      {/* </div> */}
-
-//       <div className="container grid grid-three-cols">
-//         {services.map((curElem, index) => {
-//           return (
-//             <div className="card" key={index}>
-//               <div className="card-img">
-//                 <img src="../../public/images/design.png" alt="desginer" width="200" />
-//               </div>
-
-//               <div className="card-details">
-//                 <div className="grid grid-two-cols">
-//                   <p>{curElem.provider}</p>
-
-//                   <p>{curElem.price}</p>
-//                 </div>
-
-//                 <h2>{curElem.service}</h2>
-
-//                 <p>{curElem.description}</p>
-//               </div>
-//             </div>
-//           );
-//         })}
-//       </div>
-//     </section>
-//   );
-// };
+        </>
+    );
+};
+// export {data}
