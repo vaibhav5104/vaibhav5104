@@ -67,7 +67,7 @@ userSchema.methods.generateToken = async function () {
     }catch(e){
         console.log(e);
         throw new Error("Token generation error: " + e.message);    
-    }
+email    }
 }
 
 const User = new mongoose.model("User",userSchema)

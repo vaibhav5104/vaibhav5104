@@ -19,7 +19,7 @@ const projectSchema = new mongoose.Schema({
         trim:true,//it trims or cuts the extra space before and after the name if it has
         minlength:[3,"minimum 3 letters"],
         maxlength: 30,
-        enum : ["vaibhav","bharal","yash","vinay","vikki","sukhii"]//will give an error if name value is different from these values 
+        enum : ["vaibhav","bharal","yash","vinay","vikki","sukhii"]//will give an error if name value is different from these values
     },
     age : {
         type:Number,
