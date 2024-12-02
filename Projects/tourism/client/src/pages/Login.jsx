@@ -1,9 +1,7 @@
 import React, { useState } from "react"; // Import React and useState
 import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../store/auth";
+import { useAuth } from "../store/auth";
 import { toast } from "react-toastify";
-const API = "http://localhost:3000"
-
 
 export const Login = () => {
 
@@ -13,7 +11,7 @@ export const Login = () => {
     })
 
     const navigate = useNavigate()
-    // const {storeTokenInLS,API} = useAuth()//not an inbuilt hook
+    const {storeTokenInLS,API} = useAuth()//not an inbuilt hook
 
     const handleInput = (e) => {
         let name = e.target.name
@@ -39,13 +37,13 @@ export const Login = () => {
             const res_data = await response.json();
             if(response.ok){
                 // alert("Login Successful")
-                // storeTokenInLS(res_data.token)
+                storeTokenInLS(res_data.token)
                 setUser({email:"",password:""})
                 toast.success("Login successful")
                 navigate("/")
             }else {
                 toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message)
-                console.log("Invalid Credentials");
+                // console.log("Invalid Credentials");
             }
         }catch(e){
             console.log("error is  : ",e);

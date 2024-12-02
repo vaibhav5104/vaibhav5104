@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
 
   const API = "http://localhost:3000";
   // const API = import.meta.env.VITE_API_URI_API;
-  console.log("API Endpoint:", import.meta.env); 
+  // console.log("API Endpoint:", import.meta.env); 
 
   const storeTokenInLS = (serverToken) => {
     setToken(serverToken);

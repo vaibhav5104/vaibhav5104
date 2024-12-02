@@ -1,19 +1,21 @@
 import { NavLink } from "react-router-dom"
 import "./Navbar.css"
+import { useAuth } from "../store/auth"
+
 
 export const Navbar = () => {
-
+    const {isLoggedIn} = useAuth()
     return(<>
     
             <nav className="navbar glass" style={{ height: '70px' }}>
                 <span>
-                    <NavLink to="/" style={{ display: 'flex', alignItems: 'center' }}>
+                    <NavLink to="/logo" style={{ display: 'flex', alignItems: 'center' }}>
                         <h1 className="logo">&nbsp;Travel Wizard</h1>
                     </NavLink>
                 </span>
                 <ul className="nav-links">
                     <li>
-                        <NavLink to="/" className=" cir_border">Home</NavLink>
+                        <NavLink to="/" className=" cir_border ">Home</NavLink>
                     </li>
                     <li>
                         <NavLink to="/events" className="cir_border">Events</NavLink>
@@ -33,12 +35,15 @@ export const Navbar = () => {
                     <li>
                         <NavLink to="/contact" className="cir_border">Contact</NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/register" className="cir_border">Registration</NavLink>
+                    {
+                        isLoggedIn ? <li> 
+                        <NavLink to="/logout">Logout</NavLink> 
                     </li>
-                    <li>
-                        <NavLink to="/login" className="cir_border">Login</NavLink>
-                    </li>
+                    : <>
+                        <li> <NavLink to="/register">Register</NavLink> </li>
+                        <li> <NavLink to="/login">Login</NavLink> </li>
+                    </>
+                    }
                 </ul>
                 <img src="src/img/menu-btn.png" alt="" className="menu-btn" />
         </nav>
