@@ -103,7 +103,7 @@ export const Register = () => {
                                 <div className="form-divs">
                                     <label htmlFor="phone">phone</label>
                                     <input
-                                        type="number"
+                                        type="text"
                                         name="phone"
                                         placeholder="enter your phone"
                                         id="phone"

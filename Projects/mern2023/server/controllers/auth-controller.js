@@ -90,7 +90,6 @@ const user = async (req, res) => {
     } catch (error) {
       console.log(` error from user route ${error}`);
     }
-  };
-
+};
 
 module.exports = {home,register,login,user}
