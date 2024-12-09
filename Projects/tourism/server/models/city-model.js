@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-
 const citySchema = new mongoose.Schema({
 
     name : {
@@ -47,7 +46,6 @@ citySchema.pre('save', async function () {
 
     }
 });
-
 
 const City = new mongoose.model("City",citySchema)
 module.exports = City

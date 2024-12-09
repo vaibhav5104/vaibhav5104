@@ -9,6 +9,8 @@ import { Home } from "./pages/Home"
 import { Tour } from "./pages/Tour"
 import { Navbar } from "./components/Navbar"
 import { Logout } from "./pages/Logout"
+import { Testing } from "./pages/Testing"
+
 
 export const App = () => {
 
@@ -26,6 +28,7 @@ export const App = () => {
                 <Route path="/register" element={<Register/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/logout" element={<Logout/>} />
+                <Route path="/testing" element={<Testing/>} />
             </Routes>
 
         </BrowserRouter>

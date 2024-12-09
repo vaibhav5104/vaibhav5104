@@ -17,6 +17,8 @@ app.use(cors(corsOptions))
 
 app.use(express.json());//to enable JSON parsing.meaning when we do post operation by writing something on like postman this help there
 
+app.use(express.urlencoded())//to enable form data parsing
+
 app.use("/api/auth",authRoute)
 
 app.use("/api/tour",cityRoute)

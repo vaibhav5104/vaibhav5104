@@ -1,5 +1,18 @@
 const City = require("../models/city-model")
 
+const multer = require("multer")
+
+const storage = multer.diskStorage({
+    destination : function (req,file,cb) {
+        return cb(null,"uploads")
+    },
+    filename : function (req,file,cb) {
+        return cb(null,`${Date.now()} - ${file.originalname}`)
+    }
+})
+
+const imageUpload = multer({storage : storage})
+
 const city = async (req,res) => {
 
     try {
@@ -53,5 +66,17 @@ const getCity = async (req, res) => {
     }
 };
 
+const postImage = async (req,res) => {
 
-module.exports = {city,getCity,getCityByName}
+    try {
+        console.log(req.body);
+        console.log(req.file);
+
+        return res.json({mesasge : 'image uploading successful'})
+    } catch (error) {
+        return rs.json(error)
+    }
+
+}
+
+module.exports = {city,getCity,getCityByName,postImage,imageUpload }

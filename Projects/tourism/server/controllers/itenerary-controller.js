@@ -5,8 +5,6 @@ const addItenerary = async (req,res) => {
     try {
         const {name,budget,days,places,hotels,transportation} = req.body
 
-
-        
         // there can be multiple iteneraries for same city but with different budget
         const lowerCaseName = name.toLowerCase();
 
@@ -71,4 +69,21 @@ const getItenerary = async (req,res) => {
 
 }
 
-module.exports = {addItenerary,getItenerary}
+
+const getItineraries =  async (req,res) => {
+
+    try {
+        const iteneraries = await Itenerary.find()
+
+        if(iteneraries.length === 0) {
+            return res.status(404).send({message: "There are no iteneraries"})
+        }
+
+        return res.status(201).json({iteneraries})
+    } catch (error) {
+        res.status(500).json({message :error.message })
+    }
+
+}
+
+module.exports = {addItenerary,getItenerary,getItineraries}
