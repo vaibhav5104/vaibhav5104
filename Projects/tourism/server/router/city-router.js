@@ -4,9 +4,9 @@ const cityController = require('../controllers/city-controller')
 const iteneraryController = require('../controllers/itenerary-controller')
 // const { get } = require('mongoose')
 
-const multer = require("multer")
+// const multer = require("multer")
 
-const imageUpload = multer({dest : "image/"})
+// const imageUpload = multer({dest : "uploads/"})
 
 router
     .route("/city")
@@ -22,9 +22,9 @@ router
 
 router
     .route("/city/:name/budget")
-    .post(iteneraryController.addItenerary)
+    .post(iteneraryController.multipleFileUpload,iteneraryController.addItenerary)
 
-router 
+router
     .route("/city/:name/budget")
     .get(iteneraryController.getItenerary)
 

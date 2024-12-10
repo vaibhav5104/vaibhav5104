@@ -72,9 +72,9 @@ const postImage = async (req,res) => {
         console.log(req.body);
         console.log(req.file);
 
-        return res.json({mesasge : 'image uploading successful'})
+        return res.json({message : 'image uploading successful'})
     } catch (error) {
-        return rs.json(error)
+        return res.json(error)
     }
 
 }

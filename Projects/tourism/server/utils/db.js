@@ -3,11 +3,11 @@ const dotenv = require("dotenv");
 
 dotenv.config(); // Ensure environment variables are loaded
 
-const URL = process.env.URL;
+const URI = process.env.URI;
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(URL);
+        await mongoose.connect(URI);
         console.log("Connection successful to DB");
     } catch (e) {
         console.error("Database connection failed:", e);

@@ -1,29 +1,399 @@
-const Itenerary = require("../models/itinerary-model")
+// const Itenerary = require("../models/itinerary-model")
+// const { GridFSBucket } = require('mongodb');
+// const multer = require('multer');
+// const mongoose = require("mongoose");
+// const mongoURI = process.env.URI;
 
-const addItenerary = async (req,res) => {
+// const multer = require("multer")
 
+// const storage = multer.diskStorage({
+//     destination : function (req,file,cb) {
+//         return cb(null,"uploads")
+//     },
+//     filename : function (req,file,cb) {
+//         return cb(null,`${Date.now()} - ${file.originalname}`)
+//     }
+// })
+
+// const storage = new GridFsStorage({
+//     url: mongoURI,
+//     options: { useNewUrlParser: true, useUnifiedTopology: true },
+//     file: (req, file) => {
+//         return {
+//             filename: `${Date.now()}-${file.originalname}`,
+//             bucketName: "uploads", // Collection name
+//         };
+//     },
+// });
+
+// mongoose.connection.on("connected", () => console.log("Connection successful to DB"));
+// mongoose.connection.on("error", (err) => console.error("Connection error:", err));
+
+// const imageUpload = multer({storage : storage})
+
+
+// const multipleFileUpload = (req, res, next) => {
+//     console.log("Multer middleware triggered");
+//     return imageUpload.fields([
+//         { name: 'placeImages', maxCount: 10 },
+//         { name: 'hotelImages', maxCount: 10 },
+//         { name: 'transportationImages', maxCount: 10 },
+//     ])(req, res, next);
+// };
+
+// const addItenerary = async (req, res) => {
+//     try {
+//         const { name, budget, days } = req.body;
+
+//         const places = {
+//             placeImage: req.files['placeImages']?.map((file) => file.id), // GridFS file ID
+//             placeName: req.body.placeName || [],
+//             placePrice: req.body.placePrice || [],
+//         };
+//         const hotels = {
+//             hotelImage: req.files['hotelImages']?.map((file) => file.id),
+//             hotelName: req.body.hotelName || [],
+//             hotelPrice: req.body.hotelPrice || [],
+//         };
+//         const transportation = {
+//             transportationImage: req.files['transportationImages']?.map((file) => file.id),
+//             transportationName: req.body.transportationName || [],
+//             transportationPrice: req.body.transportationPrice || [],
+//         };
+
+//         const iteneraryExists = await Itenerary.findOne({
+//             name: name.toLowerCase(),
+//             budget,
+//             days,
+//         });
+
+//         if (iteneraryExists) {
+//             return res.status(400).json({
+//                 message: "Itinerary for this city and given budget and days already exists.",
+//             });
+//         }
+
+//         const iteneraryData = {
+//             name: name.toLowerCase(),
+//             budget,
+//             days,
+//             places,
+//             hotels,
+//             transportation,
+//         };
+
+//         const iteneraryCreated = await Itenerary.create(iteneraryData);
+
+//         res.status(201).json({ message: "Itinerary Created", itenerary: iteneraryCreated });
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// };
+
+// const addItenerary = async (req,res) => {
+    
+//     try {
+//         const { name, budget, days } = req.body;
+
+//         // Collect image file paths from the request
+//         const places = {
+//             placeImage: req.files['placeImages']?.map((file) => file.path),
+//             placeName: req.body.placeName || [],
+//             placePrice: req.body.placePrice || [],
+//         };
+//         const hotels = {
+//             hotelImage: req.files['hotelImages']?.map((file) => file.path),
+//             hotelName: req.body.hotelName || [],
+//             hotelPrice: req.body.hotelPrice || [],
+//         };
+//         const transportation = {
+//             transportationImage: req.files['transportationImages']?.map((file) => file.path),
+//             transportationName: req.body.transportationName || [],
+//             transportationPrice: req.body.transportationPrice || [],
+//         };
+
+
+//         const iteneraryExists = await Itenerary.findOne({
+//             name: name.toLowerCase(),
+//             budget,
+//             days,
+//         });
+
+//         if(iteneraryExists) {
+//             res.status(400).json({message : "Itenerary for this city and it's given budget and days already exist "})
+//         }
+
+//         const iteneraryData = {
+//             name: name.toLowerCase(),
+//             budget,
+//             days,
+//             places,
+//             hotels,
+//             transportation,
+//         };
+
+//         // const iteneraryCreated = await Itenerary.create({name,budget,days,places,hotels,transportation})
+//         const iteneraryCreated = await Itenerary.create(iteneraryData);
+
+//         res.status(201).json({ message: "Itinerary Created", itenerary: iteneraryCreated });
+
+//     } catch (error) {
+//         res.status(500).json({message : error.message})
+//     }
+    
+// }
+
+// const mongoose = require("mongoose");
+// const { GridFSBucket } = require("mongodb");
+// const multer = require("multer");
+// const Itenerary = require("../models/itinerary-model");
+// const mongoURI = process.env.URI;
+
+// // MongoDB connection using createConnection
+// const conn = mongoose.createConnection(mongoURI);
+
+// let gridfsBucket;
+
+// // Wait for the connection to open
+// conn.once("open", () => {
+//     gridfsBucket = new GridFSBucket(conn.db, { bucketName: "uploads" });
+//     console.log("GridFS Bucket Ready");
+// });
+
+// // Multer configuration (store files in memory for uploading)
+// // const storage = multer.memoryStorage();
+// // const imageUpload = multer({ storage });
+
+// // Middleware for handling multiple file uploads
+// const imageUpload = multer({
+//     storage: multer.memoryStorage(),
+// }).fields([
+//     { name: "placeImages", maxCount: 10 },
+//     { name: "hotelImages", maxCount: 10 },
+//     { name: "transportationImages", maxCount: 10 },
+// ]);
+
+
+// const multipleFileUpload = (req, res, next) => {
+//     imageUpload(req, res, (err) => {
+//         if (err instanceof multer.MulterError) {
+//             return res.status(400).json({ message: err.message });
+//         } else if (err) {
+//             return res.status(500).json({ message: "File upload failed", error: err });
+//         }
+//         next();
+//     });
+// };
+
+
+// // Add itinerary and save file data to MongoDB via GridFS
+// const addItenerary = async (req, res) => {
+//     console.log("Before try");
+//     try {
+//         const { name, budget, days } = req.body;
+
+//         // Prepare file data for saving to GridFS
+//         const places = {
+//             placeImage: [],
+//             placeName: req.body.placeName || [],
+//             placePrice: req.body.placePrice || [],
+//         };
+//         const hotels = {
+//             hotelImage: [],
+//             hotelName: req.body.hotelName || [],
+//             hotelPrice: req.body.hotelPrice || [],
+//         };
+//         const transportation = {
+//             transportationImage: [],
+//             transportationName: req.body.transportationName || [],
+//             transportationPrice: req.body.transportationPrice || [],
+//         };
+
+//         // Upload files to GridFS for each category (places, hotels, transport)
+//         if (req.files.placeImages) {
+//             for (const file of req.files.placeImages) {
+//                 const uploadStream = gridfsBucket.openUploadStream(file.originalname, {
+//                     contentType: file.mimetype,
+//                 });
+//                 uploadStream.end(file.buffer);
+//                 places.placeImage.push(uploadStream.id); // Store GridFS file ID
+//             }
+//         }
+
+//         if (req.files.hotelImages) {
+//             for (const file of req.files.hotelImages) {
+//                 const uploadStream = gridfsBucket.openUploadStream(file.originalname, {
+//                     contentType: file.mimetype,
+//                 });
+//                 uploadStream.end(file.buffer);
+//                 hotels.hotelImage.push(uploadStream.id); // Store GridFS file ID
+//             }
+//         }
+
+//         if (req.files.transportationImages) {
+//             for (const file of req.files.transportationImages) {
+//                 const uploadStream = gridfsBucket.openUploadStream(file.originalname, {
+//                     contentType: file.mimetype,
+//                 });
+//                 uploadStream.end(file.buffer);
+//                 transportation.transportationImage.push(uploadStream.id); // Store GridFS file ID
+//             }
+//         }
+
+//         // Check if the itinerary already exists
+//         const iteneraryExists = await Itenerary.findOne({
+//             name: name.toLowerCase(),
+//             budget,
+//             days,
+//         });
+
+//         if (iteneraryExists) {
+//             return res.status(400).json({
+//                 message: "Itinerary for this city and given budget and days already exists.",
+//             });
+//         }
+
+//         // Prepare itinerary data to save to MongoDB
+//         const iteneraryData = {
+//             name: name.toLowerCase(),
+//             budget,
+//             days,
+//             places,
+//             hotels,
+//             transportation,
+//         };
+
+//         // Create a new itinerary record
+//         const iteneraryCreated = await Itenerary.create(iteneraryData);
+
+//         res.status(201).json({
+//             message: "Itinerary Created",
+//             itenerary: iteneraryCreated,
+//         });
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// };
+
+const mongoose = require("mongoose");
+const { GridFSBucket } = require("mongodb");
+const multer = require("multer");
+const Itenerary = require("../models/itinerary-model");
+const mongoURI = process.env.URI;
+
+// MongoDB connection using createConnection
+const conn = mongoose.createConnection(mongoURI);
+
+let gridfsBucket;
+
+conn.once("open", () => {
+    gridfsBucket = new GridFSBucket(conn.db, { bucketName: "uploads" });
+    console.log("GridFS Bucket Ready");
+});
+
+// Multer configuration
+const imageUpload = multer({
+    storage: multer.memoryStorage(),
+}).fields([
+    { name: "placeImages", maxCount: 10 },
+    { name: "hotelImages", maxCount: 10 },
+    { name: "transportationImages", maxCount: 10 },
+]);
+
+const multipleFileUpload = (req, res, next) => {
+    imageUpload(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            return res.status(400).json({ message: err.message });
+        } else if (err) {
+            return res.status(500).json({ message: "File upload failed", error: err });
+        }
+        next();
+    });
+};
+
+// Add itinerary function
+const addItenerary = async (req, res) => {
     try {
-        const {name,budget,days,places,hotels,transportation} = req.body
+        const { name, budget, days } = req.body;
 
-        // there can be multiple iteneraries for same city but with different budget
-        const lowerCaseName = name.toLowerCase();
+        const places = {
+            placeImage: [],
+            placeName: req.body.placeName || [],
+            placePrice: req.body.placePrice || [],
+        };
+        const hotels = {
+            hotelImage: [],
+            hotelName: req.body.hotelName || [],
+            hotelPrice: req.body.hotelPrice || [],
+        };
+        const transportation = {
+            transportationImage: [],
+            transportationName: req.body.transportationName || [],
+            transportationPrice: req.body.transportationPrice || [],
+        };
 
-        const cityExist = await Itenerary.findOne({name: lowerCaseName})
-        const budgetExist = await Itenerary.findOne({budget})
-
-        if(cityExist && budgetExist) {
-            res.status(400).json({message : "Itenerary for this city already exist "})
+        if (req.files.placeImages) {
+            for (const file of req.files.placeImages) {
+                const uploadStream = gridfsBucket.openUploadStream(file.originalname, {
+                    contentType: file.mimetype,
+                });
+                uploadStream.end(file.buffer);
+                places.placeImage.push(uploadStream.id);
+            }
         }
 
-        const iteneraryCreated = await Itenerary.create({name,budget,days,places,hotels,transportation})
+        if (req.files.hotelImages) {
+            for (const file of req.files.hotelImages) {
+                const uploadStream = gridfsBucket.openUploadStream(file.originalname, {
+                    contentType: file.mimetype,
+                });
+                uploadStream.end(file.buffer);
+                hotels.hotelImage.push(uploadStream.id);
+            }
+        }
 
-        res.status(201).json({message:"itenerary Created"})
+        if (req.files.transportationImages) {
+            for (const file of req.files.transportationImages) {
+                const uploadStream = gridfsBucket.openUploadStream(file.originalname, {
+                    contentType: file.mimetype,
+                });
+                uploadStream.end(file.buffer);
+                transportation.transportationImage.push(uploadStream.id);
+            }
+        }
 
+        const iteneraryExists = await Itenerary.findOne({
+            name: name.toLowerCase(),
+            budget,
+            days,
+        });
+
+        if (iteneraryExists) {
+            return res.status(400).json({
+                message: "Itinerary for this city and given budget and days already exists.",
+            });
+        }
+
+        const iteneraryData = {
+            name: name.toLowerCase(),
+            budget,
+            days,
+            places,
+            hotels,
+            transportation,
+        };
+
+        const iteneraryCreated = await Itenerary.create(iteneraryData);
+
+        res.status(201).json({
+            message: "Itinerary Created",
+            itenerary: iteneraryCreated,
+        });
     } catch (error) {
-        res.status(500).json({message : error.message})
+        res.status(500).json({ message: error.message });
     }
-    
-}
+};
+
 
 const getItenerary = async (req,res) => {
 
@@ -86,4 +456,4 @@ const getItineraries =  async (req,res) => {
 
 }
 
-module.exports = {addItenerary,getItenerary,getItineraries}
+module.exports = {addItenerary,getItenerary,getItineraries,imageUpload,multipleFileUpload}

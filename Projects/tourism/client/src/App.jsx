@@ -10,12 +10,12 @@ import { Tour } from "./pages/Tour"
 import { Navbar } from "./components/Navbar"
 import { Logout } from "./pages/Logout"
 import { Testing } from "./pages/Testing"
-
+import { AddItinerary } from "./pages/AddItenirary"
 
 export const App = () => {
 
     return(<>
-        
+
         <BrowserRouter>
             <Navbar/>
             <Routes>
@@ -29,11 +29,9 @@ export const App = () => {
                 <Route path="/login" element={<Login/>} />
                 <Route path="/logout" element={<Logout/>} />
                 <Route path="/testing" element={<Testing/>} />
+                <Route path="/additinerary" element={<AddItinerary/>} />
             </Routes>
-
         </BrowserRouter>
-
-
     </>)
 
 }
