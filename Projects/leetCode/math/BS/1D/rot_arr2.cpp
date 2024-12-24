@@ -10,6 +10,7 @@ bool search(vector<int>& nums, int target) {
         int mid = low + (high - low) / 2;
 
         if (nums[mid] == target) {
+            // cout<<mid<<endl;
             return true; // Target found
         }
 
@@ -48,7 +49,7 @@ int main() {
 
     vector<int> input = {4,5,6,7,0,1,2};
 
-    int result = search(input,2);
+    int result = search(input,0);
 
     cout<<"result is  : "<<result <<endl;
 

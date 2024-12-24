@@ -20,7 +20,7 @@ int search(vector<int>& nums, int target) {
             } else {
                 low = mid + 1; // Move to the right half
             }
-        } 
+        }
         // Otherwise, the right half is sorted
         else {
             // Check if target lies within the sorted right half
