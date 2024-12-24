@@ -334,6 +334,8 @@ const addItenerary = async (req, res) => {
 
         if (req.files.placeImages) {
             for (const file of req.files.placeImages) {
+                // console.log(file.originalname);//name of image 
+
                 const uploadStream = gridfsBucket.openUploadStream(file.originalname, {
                     contentType: file.mimetype,
                 });
@@ -438,7 +440,6 @@ const getItenerary = async (req,res) => {
     }
 
 }
-
 
 const getItineraries =  async (req,res) => {
 

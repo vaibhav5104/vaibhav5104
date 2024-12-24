@@ -17,7 +17,7 @@ const itenerarySchema = new mongoose.Schema({
     places : {
         placeImage : [{
             type:String,
-            required: true
+            required: true,
         }],
         placeName : [{
             type:String,

@@ -16,7 +16,7 @@ export const Tour = () => {
 
     const onSubmit = async () => {
         const response = await fetch(`${API}/api/tour/city/${city}`, {method:"GET"})
-        console.log("response is  : ",response)
+        // console.log("response is  : ",response)
 
         try {
 
@@ -24,7 +24,7 @@ export const Tour = () => {
                 const city_data = await response.json()
                 setIsFinal(true)
                 setFinalCity(city_data.cityData);
-                console.log("city_data is : ",city_data);
+                // console.log("city_data is : ",city_data);
 
             }else{
                 // console.error("Error:", response.status, response.statusText);
