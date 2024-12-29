@@ -191,7 +191,7 @@ export const AddItinerary = () => {
                         type="file"
                         multiple
                         onChange={(e) => handleImageChange(e, "places")}
-                      />
+                      /> 
                       <label>Place Price</label>
                       <input
                         type="number"
@@ -210,8 +210,7 @@ export const AddItinerary = () => {
                       setItinerary({
                         ...itinerary,
                         places: [...itinerary.places, { placeName: [], placePrice: [] }],
-                      })
-                    }
+                      })                    }
                   >
                     Add Place
                   </button>
@@ -228,7 +227,7 @@ export const AddItinerary = () => {
                         value={hotel.hotelName || []}
                         onChange={(e) => {
                           const updatedHotels = [...itinerary.hotels];
-                          updatedHotels[index] = { ...updatedHotels[index], hotelName: e.target.value };
+                         updatedHotels[index] = { ...updatedHotels[index], hotelName: e.target.value };
                           setItinerary({ ...itinerary, hotels: updatedHotels });
                         }}
                       />
@@ -245,7 +244,7 @@ export const AddItinerary = () => {
                         onChange={(e) => {
                           const updatedHotels = [...itinerary.hotels];
                           updatedHotels[index] = { ...updatedHotels[index], hotelPrice: e.target.value };
-                          setItinerary({ ...itinerary, hotels: updatedHotels });
+                         setItinerary({ ...itinerary, hotels: updatedHotels });
                         }}
                       />
                     </div>

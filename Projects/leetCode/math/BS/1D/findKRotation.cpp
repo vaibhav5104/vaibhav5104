@@ -2,26 +2,25 @@
 #include <vector>
 using namespace std;
 
+    /* int findMin(vector<int>& arr) {
 
-    /* int findMin(vector<int>& nums) {
-
-        int low = 0,high = nums.size() -1;
+        int low = 0,high = arr.size() -1;
 
         while(low <= high){
             int mid = (low+high)/2;
 
-            if(nums[low] < nums[high]){
+            if(arr[low] < arr[high]){
                 return low;
             }
 
-            if(nums[low] > nums[mid]){
-                if(nums[high] == nums[mid]){//11,13,15,0,1
+            if(arr[low] > arr[mid]){
+                if(arr[high] == arr[mid]){//11,13,15,0,1
                     return mid + 1;
                 }else{
                 high = mid;
                 }
-            }else if(nums[low] < nums[mid]){
-                if(nums[mid + 1] < nums[mid]){
+            }else if(arr[low] < arr[mid]){
+                if(arr[mid + 1] < arr[mid]){
                     return mid + 1;
                 }
                 else {
@@ -35,13 +34,13 @@ using namespace std;
 
     } */
 
-   int findMin(vector<int>& nums) {
-    int low = 0, high = nums.size() - 1;
+   int findKRotation(vector<int>& arr) {
+    int low = 0, high = arr.size() - 1;
 
     while (low < high) { // Use low < high for binary search
         int mid = low + (high - low) / 2; // To avoid overflow
 
-        if (nums[mid] > nums[high]) { 
+        if (arr[mid] > arr[high]) { 
             // Minimum must be in the right part
             low = mid + 1;
         } else {
@@ -50,15 +49,20 @@ using namespace std;
         }
     }
 
-    // After the loop, low == high and points to the smallest element
-    return nums[low];
+    if((arr.size() - low ) > arr.size()/2){
+        return low;
+    }else {
+        return arr.size() - low ;
+    }
 }
+
+
 
 int main() {
 
-    vector<int> input = {1,13,15,17,1};
+    vector<int> input = {5,1,2,3,4};
 
-    int result = findMin(input);
+    int result = findKRotation(input);
 
     cout<<"result is  : "<<result <<endl;
 
