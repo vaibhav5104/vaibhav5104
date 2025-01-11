@@ -10,10 +10,6 @@
 ![](https://github-readme-streak-stats.herokuapp.com/?user=Vaibhav5104&theme=dark&hide_border=false)<br/>
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=Vaibhav5104&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
 
-# 🔥 GitHub Streaks : 
-
-![](https://github-readme-streak-stats.herokuapp.com/?user=Vaibhav5104)
-
 ---
 [![](https://visitcount.itsvg.in/api?id=Vaibhav5104&icon=2&color=4)](https://visitcount.itsvg.in)
 
