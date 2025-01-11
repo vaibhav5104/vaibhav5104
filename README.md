@@ -13,5 +13,7 @@
 ---
 [![](https://visitcount.itsvg.in/api?id=Vaibhav5104&icon=2&color=4)](https://visitcount.itsvg.in)
 
+![Visitor Count](https://profile-counter.glitch.me/Vaibhav5104/count.svg)
+
 <!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
 >>>>>>> origin/master
