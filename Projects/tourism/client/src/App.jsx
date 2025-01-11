@@ -11,6 +11,8 @@ import { Navbar } from "./components/Navbar"
 import { Logout } from "./pages/Logout"
 import { Testing } from "./pages/Testing"
 import { AddItinerary } from "./pages/AddItenirary"
+import { Error } from "./pages/Error"
+
 
 export const App = () => {
 
@@ -30,6 +32,7 @@ export const App = () => {
                 <Route path="/logout" element={<Logout/>} />
                 <Route path="/testing" element={<Testing/>} />
                 <Route path="/additinerary" element={<AddItinerary/>} />
+                <Route path="/*" element={<Error/>} />
             </Routes>
         </BrowserRouter>
     </>)
