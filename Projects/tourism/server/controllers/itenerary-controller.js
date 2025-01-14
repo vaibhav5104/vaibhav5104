@@ -276,13 +276,18 @@
 // };
 
 const mongoose = require("mongoose");
+const { ObjectId } = require("mongodb");
 const { GridFSBucket } = require("mongodb");
 const multer = require("multer");
 const Itenerary = require("../models/itinerary-model");
+
 const mongoURI = process.env.URI;
+
 
 // MongoDB connection using createConnection
 const conn = mongoose.createConnection(mongoURI);
+
+// const {API} = useAuth()
 
 let gridfsBucket;
 
@@ -396,7 +401,7 @@ const addItenerary = async (req, res) => {
     }
 };
 
-
+/* 
 const getItenerary = async (req,res) => {
 
     try {
@@ -439,7 +444,66 @@ const getItenerary = async (req,res) => {
         res.status(500).json({message : error.message})
     }
 
-}
+} */
+
+    const getItenerary = async (req, res) => {
+        try {
+            const { budget, days } = req.query;
+            const _name = req.params.name;
+    
+            if (!_name || !budget || !days) {
+                return res.status(400).json({
+                    message: "Missing required parameters: name, budget, or days",
+                    budget,
+                    _name,
+                    days,
+                });
+            }
+    
+            const itineraries = await Itenerary.find({ name: _name });
+    
+            if (!itineraries || itineraries.length === 0) {
+                return res.status(404).json({ message: "No itineraries found for the specified city" });
+            }
+    
+            const rankedItineraries = itineraries.map((itinerary) => {
+                const budgetScore = Math.abs(itinerary.budget - budget);
+                const daysScore = Math.abs(itinerary.days - days);
+    
+                return {
+                    ...itinerary._doc,
+                    score: budgetScore + daysScore,
+                    places: {
+                        ...itinerary.places,
+                        placeImage: itinerary.places.placeImage.map(
+                            (id) => `http://localhost:3000/api/tour/images/${id}`
+                        ),   
+                    },
+                    hotels: {
+                        ...itinerary.hotels,
+                        hotelImage: itinerary.hotels.hotelImage.map(
+                            (id) => `http://localhost:3000/api/tour/images/${id}`
+                        ),
+                    },
+                    transportation: {
+                        ...itinerary.transportation,
+                        transportationImage: itinerary.transportation.transportationImage.map(
+                            (id) => `http://localhost:3000/api/tour/images/${id}`
+                        ),
+                    },
+                };
+            });
+    
+            rankedItineraries.sort((a, b) => a.score - b.score);
+    
+            res.status(200).json({
+                itinerary: rankedItineraries[0], // Closest match
+            });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    };
+
 
 const getItineraries =  async (req,res) => {
 
@@ -457,4 +521,30 @@ const getItineraries =  async (req,res) => {
 
 }
 
-module.exports = {addItenerary,getItenerary,getItineraries,imageUpload,multipleFileUpload}
+// Route to fetch images by their ID
+const getImageById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({ message: "Image ID is required" });
+        }
+
+        const objectId = new ObjectId(id);
+
+        const file = await conn.db.collection("uploads.files").findOne({ _id: objectId });
+        if (!file) {
+            return res.status(404).json({ message: "Image not found" });
+        }
+
+        const readStream = gridfsBucket.openDownloadStream(objectId);
+        res.set("Content-Type", file.contentType);
+        readStream.pipe(res);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+
+module.exports = {addItenerary,getItenerary,getItineraries,getImageById,imageUpload,multipleFileUpload}

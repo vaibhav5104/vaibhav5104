@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAuth } from "../store/auth"
 import { toast } from "react-toastify";
 
@@ -6,9 +6,14 @@ export const Tour = () => {
     
     const [city,setCity] = useState("")
     const [finalCity,setFinalCity] = useState(null)
+    const [itinerary,setitinerary] = useState(null)
     const [isFinal,setIsFinal] = useState(false)
+    const [isTourSubmit,setIsTourSubmit] = useState(false)
 
     const {API} = useAuth()
+
+    const [budget, setBudget] = useState(""); // State to track budget input
+    const [days, setDays] = useState("");    // State to track days input
 
     const inputEvent = (event) => {
         setCity(event.target.value)
@@ -37,9 +42,26 @@ export const Tour = () => {
     }
     // const city_component  = response
 
+    const tourSubmit = async (e) => {
+        e.preventDefault();
 
-    
-    
+        try {
+            const response = await fetch(`${API}/api/tour/city/${city}/budget?budget=${budget}&days=${days}`);
+            if (response.ok) {
+                const itineraryData = await response.json();
+                setIsTourSubmit(true)
+                setitinerary(itineraryData.itinerary)
+                console.log(itineraryData.itinerary);
+            } else {
+                console.log("Error fetching itinerary data");
+            }
+        } catch (error) {
+            console.error("Fetch error:", error);
+        }
+        
+    }
+
+
     return(<>
         
         <section className="events" id="events">
@@ -86,6 +108,94 @@ export const Tour = () => {
                                     width="200"
                                 />
                             ))}
+                            
+                            {/* Tour Code */}
+
+                            <form onSubmit={tourSubmit}>
+                                <p>Tour</p>
+                                <label>City</label>
+                                <input
+                                    type="text"
+                                    value={city}
+                                    onChange={(e) => setCity(e.target.value)}
+                                    required
+                                />
+                                <label>Budget</label>
+                                <input
+                                    type="number"
+                                    value={budget}
+                                    onChange={(e) => setBudget(e.target.value)}
+                                    required
+                                />
+                                <label>Days</label>
+                                <input
+                                    type="number"
+                                    value={days}
+                                    onChange={(e) => setDays(e.target.value)}
+                                    required
+                                />
+                                <button type="submit">Submit tour details</button>
+                                <br/>
+
+                                {isTourSubmit ? ( <>
+                                    <p>Tour submitted : </p> 
+
+                                    <div>
+                                        <h1>Itinerary: {itinerary.name}</h1>
+                                        <h2>Budget: {itinerary.budget}</h2>
+                                        <h2>Days: {itinerary.days}</h2>
+
+                                        <section>
+                                            <h3>Places</h3>
+                                            {itinerary.places.placeImage.map((img, idx) => (
+                                                <div key={idx}>
+                                                    <img
+                                                        src={img}
+                                                        alt={`Place ${idx + 1}`}
+                                                        style={{ width: "200px", margin: "10px" }}
+                                                    />
+                                                    <p>{itinerary.places.placeName[idx]}</p>
+                                                    <p>Price: {itinerary.places.placePrice[idx]}</p>
+                                                </div>
+                                            ))}
+                                        </section>
+
+                                        <section>
+                                            <h3>Hotels</h3>
+                                            {itinerary.hotels.hotelImage.map((img, idx) => (
+                                                <div key={idx}>
+                                                    <img
+                                                        src={img}
+                                                        alt={`Hotel ${idx + 1}`}
+                                                        style={{ width: "200px", margin: "10px" }}
+                                                    />
+                                                    <p>{itinerary.hotels.hotelName[idx]}</p>
+                                                    <p>Price: {itinerary.hotels.hotelPrice[idx]}</p>
+                                                </div>
+                                            ))}
+                                        </section>
+
+                                        <section>
+                                            <h3>Transportation</h3>
+                                            {itinerary.transportation.transportationImage.map((img, idx) => (
+                                                <div key={idx}>
+                                                    <img
+                                                        src={img}
+                                                        alt={`Transportation ${idx + 1}`}
+                                                        style={{ width: "200px", margin: "10px" }}
+                                                    />
+                                                    <p>{itinerary.transportation.transportationName[idx]}</p>
+                                                    <p>Price: {itinerary.transportation.transportationPrice[idx]}</p>
+                                                </div>
+                                            ))}
+                                        </section>
+                                    </div>                         
+
+                                    </> 
+                                ) : (<p>Enter Submit to see Tour packages</p>)  }
+
+                            </form>
+
                             <h3>Map:</h3>
                             {/* <iframe
                                 src={finalCity.mapUrl}

@@ -36,4 +36,8 @@ router
     .route("/image")
     .post(cityController.imageUpload.single("image-testing"),cityController.postImage)
 
+router
+    .route("/images/:id")
+    .get(iteneraryController.getImageById)
+
 module.exports = router
