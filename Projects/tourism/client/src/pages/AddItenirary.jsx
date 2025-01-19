@@ -91,16 +91,19 @@ export const AddItinerary = () => {
     itinerary.places.forEach((place, index) => {
         formData.append(`placeName`, place.placeName);
         formData.append(`placePrice`, place.placePrice);
+        formData.append(`placeLink`, place.placeLink);
     });
 
     itinerary.hotels.forEach((hotel, index) => {
         formData.append(`hotelName`, hotel.hotelName);
         formData.append(`hotelPrice`, hotel.hotelPrice);
+        formData.append(`hotelLink`, hotel.hotelLink);
     });
 
     itinerary.transportation.forEach((transport, index) => {
         formData.append(`transportationName`, transport.transportationName);
         formData.append(`transportationPrice`, transport.transportationPrice);
+        formData.append(`transportationLink`, transport.transportationLink);
     });
 
     try {
@@ -202,6 +205,16 @@ export const AddItinerary = () => {
                           setItinerary({ ...itinerary, places: updatedPlaces });
                         }}
                       />
+                      <label>Place Link</label>
+                      <input
+                        type="text"
+                        value={place.placeLink || []}
+                        onChange={(e) => {
+                          const updatedPlaces = [...itinerary.places];
+                          updatedPlaces[index] = { ...updatedPlaces[index], placeLink: e.target.value };
+                          setItinerary({ ...itinerary, places: updatedPlaces });
+                        }}
+                      />
                     </div>
                   ))}
                   <button
@@ -247,6 +260,16 @@ export const AddItinerary = () => {
                          setItinerary({ ...itinerary, hotels: updatedHotels });
                         }}
                       />
+                      <label>Hotel Link</label>
+                      <input
+                        type="text"
+                        value={hotel.hotelLink || []}
+                        onChange={(e) => {
+                          const updatedHotels = [...itinerary.hotels];
+                          updatedHotels[index] = { ...updatedHotels[index], hotelLink: e.target.value };
+                          setItinerary({ ...itinerary, hotels: updatedHotels });
+                        }}
+                      />
                     </div>
                   ))}
                   <button
@@ -290,6 +313,16 @@ export const AddItinerary = () => {
                         onChange={(e) => {
                           const updatedTransportation = [...itinerary.transportation];
                           updatedTransportation[index] = { ...updatedTransportation[index], transportationPrice: e.target.value };
+                          setItinerary({ ...itinerary, transportation: updatedTransportation });
+                        }}
+                      />
+                      <label>Transportation Link</label>
+                      <input
+                        type="text"
+                        value={transport.transportationLink || []}
+                        onChange={(e) => {
+                          const updatedTransportation = [...itinerary.transportation];
+                          updatedTransportation[index] = { ...updatedTransportation[index], transportationLink: e.target.value };
                           setItinerary({ ...itinerary, transportation: updatedTransportation });
                         }}
                       />

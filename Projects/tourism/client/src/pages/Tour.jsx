@@ -1,145 +1,166 @@
-import { useEffect, useState } from "react"
-import { useAuth } from "../store/auth"
+import { useEffect, useState } from "react";
+import { useAuth } from "../store/auth";
 import { toast } from "react-toastify";
 
 export const Tour = () => {
-    
-    const [city,setCity] = useState("")
-    const [finalCity,setFinalCity] = useState(null)
-    const [itinerary,setitinerary] = useState(null)
-    const [isFinal,setIsFinal] = useState(false)
-    const [isTourSubmit,setIsTourSubmit] = useState(false)
+    const [city, setCity] = useState("");
+    const [finalCity, setFinalCity] = useState(null);
+    const [itinerary, setItinerary] = useState(null);
+    const [isFinal, setIsFinal] = useState(false);
+    const [isTourSubmit, setIsTourSubmit] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const {API} = useAuth()
+    const { API } = useAuth();
 
-    const [budget, setBudget] = useState(""); // State to track budget input
-    const [days, setDays] = useState("");    // State to track days input
+    const [budget, setBudget] = useState("");
+    const [days, setDays] = useState("");
 
     const inputEvent = (event) => {
-        setCity(event.target.value)
-    }
+        setCity(event.target.value);
+    };
+    const getUrlType = (url) => {
+        try {
+            const parsedUrl = new URL(url);
+    
+            // Check if the URL contains a protocol (http:// or https://)
+            if (parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:") {
+                return "Absolute URL";
+            }
+    
+            // Check if it's a protocol-relative URL (starts with //)
+            if (url.startsWith("//")) {
+                return "Protocol-Relative URL";
+            }
+    
+            // Check if it's a data URL
+            if (url.startsWith("data:")) {
+                return "Data URL";
+            }
+    
+            // Otherwise, it's a relative URL
+            return "Relative URL";
+        } catch (error) {
+            return "Invalid URL";
+        }
+    };
+    
+
+    const handleClick = (url) => {
+        if (typeof url !== "string") {
+            const type = getUrlType(url)
+            toast.error(`Invalid URL format : ${type}`);
+            return;
+        }
+    
+        // Check if the URL starts with 'http' or 'https'
+        const absoluteUrl = url.startsWith("http://") || url.startsWith("https://") ? url : `https://${url}`;
+        window.location.href = absoluteUrl;
+    };
+    
+    
+    
 
     const onSubmit = async () => {
-        const response = await fetch(`${API}/api/tour/city/${city}`, {method:"GET"})
-        // console.log("response is  : ",response)
-
+        setLoading(true);
         try {
-
-            if(response.ok){
-                const city_data = await response.json()
-                setIsFinal(true)
+            const response = await fetch(`${API}/api/tour/city/${city}`, { method: "GET" });
+            if (response.ok) {
+                const city_data = await response.json();
+                setIsFinal(true);
                 setFinalCity(city_data.cityData);
-                // console.log("city_data is : ",city_data);
-
-            }else{
-                // console.error("Error:", response.status, response.statusText);
-                toast.error( `${city} ${response.statusText}` )
+            } else {
+                toast.error(`${city} ${response.statusText}`);
             }
         } catch (error) {
-            // console.log(error);
-            toast.error(error)
+            toast.error(error);
         }
-    }
-    // const city_component  = response
+        setLoading(false);
+    };
 
     const tourSubmit = async (e) => {
         e.preventDefault();
-
         try {
             const response = await fetch(`${API}/api/tour/city/${city}/budget?budget=${budget}&days=${days}`);
             if (response.ok) {
                 const itineraryData = await response.json();
-                setIsTourSubmit(true)
-                setitinerary(itineraryData.itinerary)
-                console.log(itineraryData.itinerary);
+                setIsTourSubmit(true);
+                setItinerary(itineraryData.itinerary);
             } else {
                 console.log("Error fetching itinerary data");
             }
         } catch (error) {
             console.error("Fetch error:", error);
         }
-        
-    }
+    };
 
-
-    return(<>
-        
+    return (
         <section className="events" id="events">
-        <div className="container">
-            <div className="title">
-                <h1 className="dark">City</h1>
-                <div className="line"></div>
+            <div className="container">
+                <div className="title">
+                    <h1 className="dark">City</h1>
+                    <div className="line"></div>
+                </div>
             </div>
-        </div>
 
-        <div>
-            <input 
-                type="text"
-                placeholder="Enter Destination City such as  dubai , jaipur"
-                onChange={inputEvent}
-                value={city}
-            />
-            <button className="Tbtn" onClick={onSubmit}>Enter</button>
-                    <br />
-                    {isFinal && finalCity ? (
-                        <div>
-                            <h2>City: {finalCity.name}</h2>
-                            <p>{finalCity.blog}</p>
-                            <h3>Events:</h3>
-                            <ul>
-                                {finalCity.event.name.map((event, index) => (
-                                    <li key={index}>
-                                        <strong>{event}</strong>
-                                        <br />
-                                        <img
-                                            src={finalCity.event.image[index]}
-                                            alt={event}
-                                            width="200"
-                                        />
-                                    </li>
-                                ))}
-                            </ul>
-                            <h3>City Images:</h3>
-                            {finalCity.cityImage.map((image, index) => (
-                                <img
-                                    key={index}
-                                    src={image}
-                                    alt={`City Image ${index + 1}`}
-                                    width="200"
-                                />
+            <div>
+                <input
+                    type="text"
+                    placeholder="Enter Destination City such as dubai, jaipur"
+                    onChange={inputEvent}
+                    value={city}
+                />
+                <button className="Tbtn" onClick={onSubmit} disabled={loading}>
+                    {loading ? "Loading..." : "Enter"}
+                </button>
+                <br />
+
+                {isFinal && finalCity ? (
+                    <div>
+                        <h2>City: {finalCity.name}</h2>
+                        <p>{finalCity.blog}</p>
+                        <h3>Events:</h3>
+                        <ul>
+                            {finalCity.event.name.map((event, index) => (
+                                <li key={index}>
+                                    <strong>{event}</strong>
+                                    <br />
+                                    <img
+                                        src={finalCity.event.image[index]}
+                                        alt={event}
+                                        width="200"
+                                    />
+                                </li>
                             ))}
-                            
-                            {/* Tour Code */}
+                        </ul>
 
-                            <form onSubmit={tourSubmit}>
-                                <p>Tour</p>
-                                <label>City</label>
-                                <input
-                                    type="text"
-                                    value={city}
-                                    onChange={(e) => setCity(e.target.value)}
-                                    required
-                                />
-                                <label>Budget</label>
-                                <input
-                                    type="number"
-                                    value={budget}
-                                    onChange={(e) => setBudget(e.target.value)}
-                                    required
-                                />
-                                <label>Days</label>
-                                <input
-                                    type="number"
-                                    value={days}
-                                    onChange={(e) => setDays(e.target.value)}
-                                    required
-                                />
-                                <button type="submit">Submit tour details</button>
-                                <br/>
+                        {/* Tour form */}
+                        <form onSubmit={tourSubmit}>
+                            <label>City</label>
+                            <input
+                                type="text"
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
+                                required
+                            />
+                            <label>Budget</label>
+                            <input
+                                type="number"
+                                value={budget}
+                                onChange={(e) => setBudget(e.target.value)}
+                                required
+                            />
+                            <label>Days</label>
+                            <input
+                                type="number"
+                                value={days}
+                                onChange={(e) => setDays(e.target.value)}
+                                required
+                            />
+                            <button type="submit">Submit tour details</button>
 
-                                {isTourSubmit ? ( <>
-                                    <p>Tour submitted : </p> 
-
+                            {isTourSubmit ? (
+                                <>
+                                    <p>Tour submitted:</p>
                                     <div>
                                         <h1>Itinerary: {itinerary.name}</h1>
                                         <h2>Budget: {itinerary.budget}</h2>
@@ -156,6 +177,12 @@ export const Tour = () => {
                                                     />
                                                     <p>{itinerary.places.placeName[idx]}</p>
                                                     <p>Price: {itinerary.places.placePrice[idx]}</p>
+                                                    {itinerary.places.placeLink[idx] ? (
+                                                        <button onClick={() => handleClick(itinerary.places.placeLink[idx])}>
+                                                            Go To
+                                                        </button>
+                                                    ) : (<h3>No button</h3>) }
+
                                                 </div>
                                             ))}
                                         </section>
@@ -171,6 +198,11 @@ export const Tour = () => {
                                                     />
                                                     <p>{itinerary.hotels.hotelName[idx]}</p>
                                                     <p>Price: {itinerary.hotels.hotelPrice[idx]}</p>
+                                                    {itinerary.hotels.hotelLink[idx] ? (
+                                                        <button onClick={() => handleClick(itinerary.hotels.hotelLink[idx])}>
+                                                            Go To
+                                                        </button>
+                                                    ) : (<h3>No button</h3>) }
                                                 </div>
                                             ))}
                                         </section>
@@ -186,33 +218,26 @@ export const Tour = () => {
                                                     />
                                                     <p>{itinerary.transportation.transportationName[idx]}</p>
                                                     <p>Price: {itinerary.transportation.transportationPrice[idx]}</p>
+                                                    {itinerary.transportation.transportationLink[idx] ? (
+                                                        <button onClick={() => handleClick(itinerary.transportation.transportationLink[idx])}>
+                                                            Go To
+                                                        </button>
+                                                    ) : (<h3>No button</h3>) }
                                                 </div>
                                             ))}
                                         </section>
-                                    </div>                         
+                                    </div>
+                                </>
+                            ) : (
+                                <p>Enter Submit to see Tour packages</p>
+                            )}
+                        </form>
 
-                                    </> 
-                                ) : (<p>Enter Submit to see Tour packages</p>)  }
-
-                            </form>
-
-                            <h3>Map:</h3>
-                            {/* <iframe
-                                src={finalCity.mapUrl}
-                                title="City Map"
-                                width="600"
-                                height="450"
-                                style={{ border: "0" }}
-                                allowFullScreen=""
-                                loading="lazy"
-                            ></iframe> */}
-                        </div>
-                    ) : (
-                        <p>Enter a city to see details</p>
-                    )}
-        </div>
-
-      </section>
-
-    </>)
-}
+                    </div>
+                ) : (
+                    <p>Enter a city to see details</p>
+                )}
+            </div>
+        </section>
+    );
+};

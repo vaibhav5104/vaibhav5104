@@ -1,5 +1,4 @@
 const City = require("../models/city-model")
-
 const multer = require("multer")
 
 const storage = multer.diskStorage({
@@ -13,7 +12,7 @@ const storage = multer.diskStorage({
 
 const imageUpload = multer({storage : storage})
 
-const city = async (req,res) => {
+const addCity = async (req,res) => {
 
     try {
 
@@ -79,4 +78,4 @@ const postImage = async (req,res) => {
 
 }
 
-module.exports = {city,getCity,getCityByName,postImage,imageUpload }
+module.exports = {addCity,getCity,getCityByName,postImage,imageUpload }

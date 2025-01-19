@@ -14,7 +14,7 @@ router
 
 router
     .route("/add/city")
-    .post(cityController.city)
+    .post(cityController.addCity)
 
 router
     .route("/city/:name")

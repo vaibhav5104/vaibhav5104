@@ -27,6 +27,10 @@ const itenerarySchema = new mongoose.Schema({
             type:Number,
             required: true
         }],
+        placeLink : [{
+            type: String,
+            required : false
+        }]
     },
     hotels : {
         hotelImage : [{
@@ -41,6 +45,10 @@ const itenerarySchema = new mongoose.Schema({
             type:String,
             required: true
         }],
+        hotelLink : [{
+            type: String,
+            required : false
+        }]
     },
     transportation : {
         transportationImage : [{
@@ -55,6 +63,10 @@ const itenerarySchema = new mongoose.Schema({
             type:String,
             required: true
         }],
+        transportationLink : [{
+            type: String,
+            required : false
+        }]
     },
 
 })
