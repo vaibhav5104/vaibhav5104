@@ -122,5 +122,6 @@
     "stacktrace": "cpp",
     "bitset": "cpp"
   },
-  "C_Cpp.errorSquiggles": "disabled"
+  "C_Cpp.errorSquiggles": "disabled",
+  "C_Cpp.default.compilerPath": "/usr/bin/gcc-11"
 }
