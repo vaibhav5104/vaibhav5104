@@ -5,7 +5,6 @@ const multer = require("multer");
 const Itenerary = require("../models/itinerary-model");
 const mongoURI = process.env.URI;
 
-
 // MongoDB connection using createConnection
 const conn = mongoose.createConnection(mongoURI);
 
@@ -15,7 +14,7 @@ let gridfsBucket;//gridfsBucket is an instance of GridFSBucket, a MongoDB utilit
 
 conn.once("open", () => {
     gridfsBucket = new GridFSBucket(conn.db, { bucketName: "uploads" });
-    console.log("GridFS Bucket Ready");
+    console.log("GridFS Bucket Ready in itenirary-controller");
 });
 
 // Multer configuration
@@ -97,7 +96,6 @@ const addItenerary = async (req, res) => {
                 transportation.transportationImage.push(uploadStream.id);
             }
         }
-
         const iteneraryExists = await Itenerary.findOne({
             name: name.toLowerCase(),
             budget,

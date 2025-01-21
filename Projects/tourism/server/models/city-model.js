@@ -13,19 +13,23 @@ const citySchema = new mongoose.Schema({
         }
     ],
 
-    event: {
-        name : [
+    events: {
+        eventName : [
             {
             type:String,
             required:true
             }
         ],
-        image:[
+        eventImage:[
             {
                 type:String,
                 required:true
             }
-        ]
+        ],
+        eventLink:[{
+            type:String,
+            required:false
+        }]
     },
     blog: {
         type:String,

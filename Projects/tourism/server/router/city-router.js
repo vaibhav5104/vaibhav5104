@@ -14,7 +14,7 @@ router
 
 router
     .route("/add/city")
-    .post(cityController.addCity)
+    .post(cityController.multipleFileUpload,cityController.addCity)
 
 router
     .route("/city/:name")
@@ -32,9 +32,9 @@ router
     .route("/city/budget/itineraries") // route can only /itineraries
     .get(iteneraryController.getItineraries)
 
-router
-    .route("/image")
-    .post(cityController.imageUpload.single("image-testing"),cityController.postImage)
+// router
+    // .route("/image")
+    // .post(cityController.imageUpload.single("image-testing"),cityController.postImage)
 
 router
     .route("/images/:id")

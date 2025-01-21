@@ -12,6 +12,7 @@ import { Logout } from "./pages/Logout"
 import { Testing } from "./pages/Testing"
 import { AddItinerary } from "./pages/AddItenirary"
 import { Error } from "./pages/Error"
+import { AddCity } from "./pages/AddCity"
 
 
 export const App = () => {
@@ -32,6 +33,7 @@ export const App = () => {
                 <Route path="/logout" element={<Logout/>} />
                 <Route path="/testing" element={<Testing/>} />
                 <Route path="/additinerary" element={<AddItinerary/>} />
+                <Route path="/addcity" element={<AddCity/>} />
                 <Route path="/*" element={<Error/>} />
             </Routes>
         </BrowserRouter>

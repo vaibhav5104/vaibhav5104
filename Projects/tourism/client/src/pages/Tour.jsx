@@ -118,19 +118,40 @@ export const Tour = () => {
                     <div>
                         <h2>City: {finalCity.name}</h2>
                         <p>{finalCity.blog}</p>
-                        <h3>Events:</h3>
+                        <h3>Upcoming Events</h3>
                         <ul>
-                            {finalCity.event.name.map((event, index) => (
+                            {
+                                
+                                finalCity.cityImage.map((image, index) => (
+                                    
+                                    <li key={index}>
+                                        <img 
+                                            src={image}
+                                            alt={finalCity.name}
+                                            width="200"
+                                        />
+                                    </li>
+                                ))
+
+                            }
+                        </ul>
+                        <ul>
+                            {finalCity.events.eventName?.map((eventName, index) => (
                                 <li key={index}>
-                                    <strong>{event}</strong>
-                                    <br />
                                     <img
-                                        src={finalCity.event.image[index]}
-                                        alt={event}
+                                        src={finalCity.events.eventImage?.[index]} // Safely access 'eventImage'
+                                        alt={eventName}
                                         width="200"
                                     />
+                                    <br />
+                                    <strong>{eventName}</strong>
+                                    <br />
+                                    <button onClick={() => handleClick(finalCity.events.eventLink?.[index])}>
+                                        Go To
+                                    </button>
                                 </li>
-                            ))}
+                            ))
+                            }
                         </ul>
 
                         {/* Tour form */}
