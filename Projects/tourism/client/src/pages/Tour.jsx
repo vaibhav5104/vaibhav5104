@@ -46,39 +46,50 @@ export const Tour = () => {
     
 
     const handleClick = (url) => {
-        if (typeof url !== "string") {
-            const type = getUrlType(url)
-            toast.error(`Invalid URL format : ${type}`);
+        if (!url || typeof url !== "string") {
+            toast.error("Invalid URL");
             return;
         }
     
-        // Check if the URL starts with 'http' or 'https'
         const absoluteUrl = url.startsWith("http://") || url.startsWith("https://") ? url : `https://${url}`;
-        window.location.href = absoluteUrl;
+        try {
+            window.open(absoluteUrl, "_blank", "noopener,noreferrer");
+        } catch (error) {
+            toast.error("Unable to open URL");
+        }
     };
-    
-    
-    
 
-    const onSubmit = async () => {
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        if (!city.trim()) {
+            toast.error("City name is required!");
+            return;
+        }
+    
         setLoading(true);
         try {
             const response = await fetch(`${API}/api/tour/city/${city}`, { method: "GET" });
             if (response.ok) {
-                const city_data = await response.json();
+                const cityData = await response.json();
                 setIsFinal(true);
-                setFinalCity(city_data.cityData);
+                setFinalCity(cityData.city);
             } else {
                 toast.error(`${city} ${response.statusText}`);
             }
         } catch (error) {
-            toast.error(error);
+            toast.error(`Error fetching city data: ${error.message}`);
         }
         setLoading(false);
     };
+    
 
     const tourSubmit = async (e) => {
         e.preventDefault();
+        if (!budget || !days) {
+            toast.error("Both budget and days are required!");
+            return;
+        }
+    
         try {
             const response = await fetch(`${API}/api/tour/city/${city}/budget?budget=${budget}&days=${days}`);
             if (response.ok) {
@@ -86,12 +97,13 @@ export const Tour = () => {
                 setIsTourSubmit(true);
                 setItinerary(itineraryData.itinerary);
             } else {
-                console.log("Error fetching itinerary data");
+                toast.error("Error fetching itinerary data");
             }
         } catch (error) {
-            console.error("Fetch error:", error);
+            toast.error(`Error: ${error.message}`);
         }
     };
+    
 
     return (
         <section className="events" id="events">
@@ -113,46 +125,45 @@ export const Tour = () => {
                     {loading ? "Loading..." : "Enter"}
                 </button>
                 <br />
-
+                {/* City Form */}
                 {isFinal && finalCity ? (
                     <div>
                         <h2>City: {finalCity.name}</h2>
                         <p>{finalCity.blog}</p>
-                        <h3>Upcoming Events</h3>
+                        <h3>City Images</h3>
                         <ul>
-                            {
-                                
-                                finalCity.cityImage.map((image, index) => (
-                                    
+                            <div>
+                                {finalCity.cityImage?.map((image, index) => (
                                     <li key={index}>
                                         <img 
-                                            src={image}
-                                            alt={finalCity.name}
-                                            width="200"
+                                            src={image} 
+                                            alt={finalCity.name} 
+                                            width="200" 
                                         />
                                     </li>
-                                ))
-
-                            }
+                                )) || <p>No city images available</p>}
+                            </div>
+                            
                         </ul>
+                            <h2>Events : </h2>
                         <ul>
-                            {finalCity.events.eventName?.map((eventName, index) => (
+                            {finalCity.events?.eventName.map((eventName, index) => (
                                 <li key={index}>
                                     <img
-                                        src={finalCity.events.eventImage?.[index]} // Safely access 'eventImage'
+                                        src={finalCity.events?.eventImage?.[index] || ''}
                                         alt={eventName}
                                         width="200"
                                     />
                                     <br />
                                     <strong>{eventName}</strong>
                                     <br />
-                                    <button onClick={() => handleClick(finalCity.events.eventLink?.[index])}>
+                                    <button onClick={() => handleClick(finalCity.events?.eventLink?.[index])}>
                                         Go To
                                     </button>
                                 </li>
-                            ))
-                            }
+                            )) || <p>No events available</p>}
                         </ul>
+
 
                         {/* Tour form */}
                         <form onSubmit={tourSubmit}>

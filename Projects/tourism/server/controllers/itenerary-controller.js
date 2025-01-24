@@ -8,8 +8,6 @@ const mongoURI = process.env.URI;
 // MongoDB connection using createConnection
 const conn = mongoose.createConnection(mongoURI);
 
-// const {API} = useAuth()
-
 let gridfsBucket;//gridfsBucket is an instance of GridFSBucket, a MongoDB utility that allows for storing and retrieving large files (like images) in MongoDB
 
 conn.once("open", () => {
@@ -153,7 +151,12 @@ const getItenerary = async (req, res) => {
             const daysScore = Math.abs(itinerary.days - days);
 
             return {
-                ...itinerary._doc,
+                ...itinerary._doc, 
+                // itinerary is a Mongoose document with methods like save and update.
+                // itinerary._doc contains the raw data as a plain JavaScript object.
+                // When you spread ...itinerary._doc, you extract the raw data of the document and
+                // include it in the new object being returned. This is useful for ensuring you're 
+                // working with the plain object rather than the extended Mongoose document.
                 score: budgetScore + daysScore,
                 places: {
                     ...itinerary.places,

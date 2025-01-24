@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { GridFSBucket } = require("mongodb");
 const City = require("../models/city-model")
-const multer = require("multer")
+const multer = require("multer");
 const mongoURI = process.env.URI;
 
 // MongoDB connection using createConnection
@@ -34,83 +34,92 @@ const multipleFileUpload = (req, res, next) => {
     });
 };
 
-const addCity = async (req,res) => {
-
+const addCity = async (req, res) => {
     try {
-
         const { name, blog, mapUrl } = req.body;
 
         const events = {
-            eventImage : [],
-            eventName : req.body.eventName || [],
-            eventLink : req.body.eventLink || []
-        }
+            eventImage: [],
+            eventName: Array.isArray(req.body.eventName) ? req.body.eventName : [req.body.eventName],
+            eventLink: Array.isArray(req.body.eventLink) ? req.body.eventLink : [req.body.eventLink],
+        };
+
         const cityImage = [];
 
+        // Process event images
         if (req.files.eventImages) {
-            for (const file of req.files.eventImages) {//contains an array of uploaded image files
-                //Each file has properties like originalname (name of the file), mimetype (file type), and buffer (binary data of the file)
-                // console.log(file.originalname);//name of image 
-
-                // Creates a writable stream for GridFSBucket to upload the file
-                const uploadStream = gridfsBucket.openUploadStream(file.originalname, {
-                    contentType: file.mimetype,
-                });
-                uploadStream.end(file.buffer);//Ends the writable stream by writing the file's binary data (file.buffer) into GridFS. This uploads the file to the database
-                events.eventImage.push(uploadStream.id);//places.placeImage is an array in your database model where the IDs of the uploaded images will be stored
-                // After uploading, uploadStream.id contains the ID of the stored file in GridFS. This ID is pushed into the hotels.hotelImage array, allowing the application to reference the uploaded file later (e.g., for displaying or downloading the image)
-            }
-        }
-
-        if (req.files.cityImages) {
-            for (const file of req.files.cityImages) {
-                const uploadStream = gridfsBucket.openUploadStream(file.originalname, {
+            for (const file of req.files.eventImages) {
+                const uploadStream = await gridfsBucket.openUploadStream(file.originalname, {
                     contentType: file.mimetype,
                 });
                 uploadStream.end(file.buffer);
-                cityImage.push(uploadStream.id);
+                events.eventImage.push(uploadStream.id); // Push each image ID into the array
             }
         }
 
-        const cityExist = await City.findOne({name : name.toLowerCase()})
-
-        if(cityExist) {
-            return res.status(400).json({message:"City already exist"})
+        // Process city images
+        if (req.files.cityImages) {
+            for (const file of req.files.cityImages) {
+                const uploadStream = await gridfsBucket.openUploadStream(file.originalname, {
+                    contentType: file.mimetype,
+                });
+                uploadStream.end(file.buffer);
+                cityImage.push(uploadStream.id); // Push each image ID into the array
+            }
         }
 
-        const cityData = {name :  name.toLowerCase(), cityImage, events, blog, mapUrl}
+        const cityExist = await City.findOne({ name: name.toLowerCase() });
+        if (cityExist) {
+            return res.status(400).json({ message: "City already exists" });
+        }
+
+        const cityData = { name: name.toLowerCase(), cityImage, events, blog, mapUrl };
         
-        const cityCreated = await City.create(cityData) //it creates and saves the document
+        const cityCreated = await City.create(cityData);
 
-        res
-            .status(201)
-            .json({
-                message : "City created successfully",
-                city : cityCreated
-            })
-
+        res.status(201).json({
+            message: "City created successfully",
+            city: cityCreated,
+        });
     } catch (error) {
-        res.status(500).json({error :error.message })
+        console.error(error);
+        res.status(500).json({ error: error.message });
     }
+};
 
-}
-
-const getCityByName = async (req,res) => {
-
+const getCityByName = async (req, res) => {
     try {
-        const _name = req.params.name
-        const cityData = await City.findOne({name : _name});
+        const _name = req.params.name;
+        const cityData = await City.findOne({ name: _name });
 
         if (!cityData) {
-            return res.status(404).send({message:`There is no data for ${_name} city`  });  // Send 404 if the student is not found
+            return res.status(404).send({ message: `There is no data for ${_name} city` });
         }
 
-        return res.status(201).json({cityData})
-    } catch (error) {
-        res.status(500).json({error:error.message})
-    }
+        // Convert image IDs to URLs
+        const cityImageUrls = cityData.cityImage.map(
+            (id) => `http://localhost:3000/api/tour/images/${id}`
+        );
 
-}
+        const eventImageUrls = cityData.events.eventImage.map(
+            (id) => `http://localhost:3000/api/tour/images/${id}`
+        );
+
+        const formattedCityData = {
+                ...cityData._doc, // Include the raw city data
+                cityImage: cityImageUrls, // Replace cityImage IDs with URLs
+                events: {
+                    ...cityData.events,
+                    eventImage: eventImageUrls, // Replace eventImage IDs with URLs
+                }
+            
+        };
+
+        return res.status(200).json({ city: formattedCityData });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 
 const getCity = async (req, res) => {
     try {

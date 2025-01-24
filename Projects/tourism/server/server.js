@@ -5,7 +5,7 @@ const connectDB = require('./utils/db')
 const PORT = 3000
 const authRoute = require("./router/auth-router")
 const cityRoute = require("./router/city-router")
-// const adminRoute = require("./router/admin-router")
+const adminRoute = require("./router/admin-router")
 
 const corsOptions = {
     origin: "http://localhost:5173",
@@ -24,7 +24,7 @@ app.use("/api/auth",authRoute)
 
 app.use("/api/tour",cityRoute)
 
-// app.use("/api/admin",adminRoute)
+app.use("/api/admin",adminRoute)
 
 connectDB().then(()=> {
 

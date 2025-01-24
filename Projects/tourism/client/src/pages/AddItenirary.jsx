@@ -2,9 +2,20 @@ import { useState } from "react";
 import "../index.css";
 import { useAuth } from "../store/auth";
 import { toast } from "react-toastify";
+import {Navigate } from "react-router-dom";
 
 export const AddItinerary = () => {
-  const { API } = useAuth();
+  const { user, isLoading, API,authorizationToken  } = useAuth();
+
+  if (isLoading) {
+    return <h1>Loading ...</h1>;
+  }
+
+  if(!(user)) {
+    return <Navigate to="/" />;
+  }else if(!user.isAdmin){
+    return <Navigate to="/" />;
+  }
 
   const defaultItinerary = {
     name: [],
@@ -107,9 +118,12 @@ export const AddItinerary = () => {
     });
 
     try {
-        const response = await fetch(`${API}/api/tour/city/${itinerary.name}/budget`, {
+        const response = await fetch(`${API}/api/admin/city/${itinerary.name}/budget`, {
             method: "POST",
             body: formData,
+            headers: {
+            Authorization: authorizationToken,
+            },
         });
 
         if (response.ok) {

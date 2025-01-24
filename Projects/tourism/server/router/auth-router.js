@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const authControllers = require('../controllers/auth-controller')
+const authMiddleware = require('../middlewares/auth-middleware')
 
 router
     .route("/register")
@@ -12,6 +13,6 @@ router
 
 router
     .route("/user")
-    .get(authControllers.user)
+    .get(authMiddleware,authControllers.user)
 
 module.exports = router

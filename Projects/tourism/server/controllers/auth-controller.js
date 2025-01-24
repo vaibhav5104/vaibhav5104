@@ -54,8 +54,8 @@ const user = async (req,res) => {
 
     try {
         // const userData = await User.find({});
-        // const userData = req.user;
-        const userData = await User.find({}, {password:0})
+        const userData = req.user;
+        // const userData = await User.find({}, {password:0})
   
       //   console.log(userData);
         return res.status(200).json({ userData });

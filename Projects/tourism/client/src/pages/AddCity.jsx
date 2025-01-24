@@ -265,19 +265,36 @@
 import React, { useState,useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "../store/auth";
+import {Navigate } from "react-router-dom";
+
 
 export const AddCity = () => {
+
+  const { user, isLoading, API, authorizationToken } = useAuth();
+
+  // State and refs
   const [cityData, setCityData] = useState({
     name: "",
     blog: "",
     mapUrl: "",
   });
-  const cityImageInputRef = useRef(null); // Create a ref for the file input
-
+  const cityImageInputRef = useRef(null);
   const [events, setEvents] = useState([
     { eventName: "", eventImage: null, eventLink: "" },
   ]);
   const [cityImages, setCityImages] = useState([]);
+
+  // Check if loading
+  if (isLoading) {
+    return <h1>Loading ...</h1>;
+  }
+
+  // Redirect based on user status
+  const shouldRedirect = !user || !user.isAdmin;
+  if (shouldRedirect) {
+    return <Navigate to="/" />;
+  }
 
   const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
   const VALID_FILE_TYPES = ["image/jpeg", "image/png", "image/jpg"];
@@ -354,9 +371,12 @@ export const AddCity = () => {
     cityImages.forEach((image) => formData.append("cityImages", image));
 
     try {
-      const response = await fetch("http://localhost:3000/api/tour/add/city", {
+      const response = await fetch("http://localhost:3000/api/admin/add/city", {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: authorizationToken,
+        },
       });
 
       const result = await response.json();

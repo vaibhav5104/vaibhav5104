@@ -48,8 +48,7 @@ void  traversalAndLengthOfLL(Node* head){
     cout<<"Lenght of LL is : " <<cnt<<endl;
 }
 
-Node* insertAtEnd(vector<int>& arr,int x){
-    Node* head = convertArrToLL(arr);
+Node* insertAtEnd(Node* head, int x) {
     Node* mover = new Node(x); // Create a new node with value x
 
     // If the linked list is empty, return the new node as the head
@@ -70,40 +69,71 @@ Node* insertAtEnd(vector<int>& arr,int x){
     return head;
 }
 
+
 Node* insertAtStart(vector<int>& arr,int x){
 
     Node*head = convertArrToLL(arr);
-    Node* start = new Node(x);
-    start->next = head;
-
+    Node* start = new Node(x,head);
+    // start->next = head;
+ 
     return start;
-
 }
+Node* insertAtRandom(Node* head, int value, int k) {
+    if (head == nullptr) {
+        if(k == 1) return new Node(value);
+        else return nullptr;
+    }
 
-Node* insertAtRandom(vector<int>& arr,Node* x,int k){
-
-    Node*head = convertArrToLL(arr);
+    if(k == 1) {
+        Node* temp = new Node(value,head);
+        return temp;
+    }
 
     Node* temp = head;
 
-    while(temp->next != nullptr){
-
-        if(temp->data == k){
-            x->next = temp->next;
-            temp->next = x;
-            break;
+    // Traverse the list to find the node with value k
+    while (temp != nullptr) {
+        if (temp->data == k) {
+            // Insert the new node after the current node
+            Node* newNode = new Node(value); // Create the new node
+            newNode->next = temp->next;      // Link the new node to the next node
+            temp->next = newNode;            // Update the current node's next pointer
+            return head;                     // Return the head of the list
         }
-        temp = temp->next; 
-
+        temp = temp->next; // Move to the next node
     }
 
+    // If k is not found, return the unchanged list
+    cout << "Key " << k << " not found in the list.\n";
     return head;
-
 }
+
+Node* insertBeforeVal(Node* head,int k,int val){//insert val before k
+    if(head == NULL) return head;
+    if(head->data == k) return new Node(val,head);
+    Node* temp = head;
+    Node* valNode = new Node(val);
+    Node* mover ; 
+    while(temp->next != nullptr){
+        temp = temp->next;
+        if(temp->data == k){
+            mover->next = valNode;
+            valNode->next = temp;
+            // return head;
+        }
+        mover = temp;
+    }
+    return head;
+}
+
+
 
 int main() {
 
-    // Your code here
+    vector<int> arr = {1,2,3,4,5};
+    Node* head = convertArrToLL(arr);
+    Node* newHead = insertBeforeVal(head,4,22);
+    traversalAndLengthOfLL(newHead);
 
     return 0;
 }

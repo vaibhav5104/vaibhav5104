@@ -48,25 +48,6 @@ void  traversalAndLengthOfLL(Node* head){
     cout<<"Lenght of LL is : " <<cnt<<endl;
 }
 
-Node* deleteAtRandom(vector<int>& arr,int x){
-
-    Node*head = convertArrToLL(arr);
-    Node* temp = head;
-    Node* mover = head;
-
-    while(temp->next != nullptr){
-
-        if(temp->data == x){
-            mover->next = temp->next;
-            return head;
-        }
-
-        temp = temp->next;
-        mover = mover->next;
-
-    }
-
-}
 
 
 
@@ -74,7 +55,7 @@ int main(){
     vector<int> arr={3,4,0};
 
     Node* x = new Node(100);
-    Node* result = deleteAtRandom(arr,4);
+    Node* result = convertArrToLL(arr);
     traversalAndLengthOfLL(result);
     
     return 0;
