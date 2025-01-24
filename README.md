@@ -19,10 +19,10 @@
 <p align="left">
 <a href="https://twitter.com/vaibhav5104" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="vaibhav5104" height="30" width="40" /></a>
 <a href="https://linkedin.com/in/vaibhav5104" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="vaibhav5104" height="30" width="40" /></a>
-<a href="https://www.youtube.com/c/vaibhav5104" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg" alt="vaibhav5104" height="30" width="40" /></a>
-<a href="https://www.hackerrank.com/vaibhav5104" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/hackerrank.svg" alt="vaibhav5104" height="30" width="40" /></a>
+<a href="https://www.youtube.com/@vaibhav_5104" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg" alt="vaibhav5104" height="30" width="40" /></a>
+<a href="https://www.hackerrank.com/profile/vaibhavsharma511" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/hackerrank.svg" alt="vaibhav5104" height="30" width="40" /></a>
 <a href="https://www.leetcode.com/vaibhav5104" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg" alt="vaibhav5104" height="30" width="40" /></a>
-<a href="https://auth.geeksforgeeks.org/user/vaibhav5104" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/geeks-for-geeks.svg" alt="vaibhav5104" height="30" width="40" /></a>
+<a href="https://www.geeksforgeeks.org/user/vaibhavshjqmx/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/geeks-for-geeks.svg" alt="vaibhav5104" height="30" width="40" /></a>
 </p>
 
 # 💻 Tech Stack:
