@@ -1,16 +1,14 @@
-<h1 align="center">Hi 👋, I'm Vaibhav Sharma</h1>
-<h3 align="center">A passionate frontend developer from India</h3>
-
+<h1 align="center">Hi 👋, I'm Vaibhav Sharma</h1>>
 
 <p align="left"> <a href="https://twitter.com/vaibhav5104" target="blank"><img src="https://img.shields.io/twitter/follow/vaibhav5104?logo=twitter&style=for-the-badge" alt="vaibhav5104" /></a> </p>
 
-- 🔭 I’m currently working on [Travel Wizard](https://travelwizard.netlify.app/)
+- 🔭 I’m currently working on [Travel Wizard](https://travelwizard.netlify.app/).
 
 - 🌱 I’m currently learning **DSA and WebDev**
 
 - 👨‍💻 All of my projects are available at [https://github.com/vaibhav5104](https://github.com/vaibhav5104)
 
-- 💬 Ask me about **reactJs,MongoDB**
+- 💬 Ask me about **reactJs,MongoDB,Linux**
 
 - 📫 How to reach me **vaibhavsharma5104@gmail.com**
 
