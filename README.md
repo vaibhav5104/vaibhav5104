@@ -1,4 +1,4 @@
-<h1 align="center">Hi 👋, I'm Vaibhav Sharma</h1>>
+<h1 align="center">Hi 👋, I'm Vaibhav Sharma</h1>
 
 <p align="left"> <a href="https://twitter.com/vaibhav5104" target="blank"><img src="https://img.shields.io/twitter/follow/vaibhav5104?logo=twitter&style=for-the-badge" alt="vaibhav5104" /></a> </p>
 
